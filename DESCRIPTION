@@ -1,7 +1,7 @@
 Package: co2ntent
 Type: Package
 Title: Calculate Carbon Dioxide and Oxygen content of blood
-Version: 0.0.0.9001
+Version: 0.0.1
 Authors@R: person("Barnaby", "Sanderson", email = "barnaby.sanderson@gstt.nhs.uk",
   role = c("aut", "cre"))
 Description: Collection of functions for calculating the Carbon Dioxide and Oxygen, 
