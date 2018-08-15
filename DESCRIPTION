@@ -1,13 +1,16 @@
 Package: co2ntent
 Type: Package
-Title: 
-Version: 0.0.0.9000
+Title: Calculate Carbon Dioxide and Oxygen content of blood
+Version: 0.0.1
 Authors@R: person("Barnaby", "Sanderson", email = "barnaby.sanderson@gstt.nhs.uk",
   role = c("aut", "cre"))
-Description: Collection of functions for calculating the Carbon Dioxide, CO2, 
+Description: Collection of functions for calculating the Carbon Dioxide and Oxygen, 
     content of plasma and/or blood, plus various other related parameters.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: testthat
+Imports: Rdpack
+RdMacros: Rdpack
+Depends: R (>= 2.10)
