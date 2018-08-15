@@ -2,16 +2,22 @@
 % Please edit documentation in R/serum_solubility_pk.R
 \name{co2_plasma_solubility}
 \alias{co2_plasma_solubility}
-\title{Calculate the solubility coefficient of CO2 in plasma. Austin et al(1963)}
+\title{Calculate the solubility coefficient of CO2 in plasma.}
 \usage{
-co2_plasma_solubility(t)
+co2_plasma_solubility(temperature = 37)
 }
 \arguments{
-\item{t}{Plasma Temperature.}
+\item{temperature}{Plasma Temperature in Celcius. Default 37c}
 }
 \value{
-The solubility coefficient of CO2 in plasma
+s The solubility coefficient of CO2 in plasma mmol/dL/kPa
 }
 \description{
-Calculate the solubility coefficient of CO2 in plasma. Austin et al(1963)
+\code{co2_plasma_solubility} calculates the solubility coefficient
+of CO2 in plasma via the formula described by \insertCite{douglas_1988}{co2ntent}.
+}
+\references{
+{
+  \insertRef{douglas_1988}{co2ntent}
+}
 }
