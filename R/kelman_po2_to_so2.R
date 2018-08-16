@@ -61,8 +61,49 @@ std_kelman_po2_to_so2 <- function(po2, inputs_are_kpa=TRUE) {
 #' @param pco2 CO2 partial pressure. Default 5.332895kPa (40mmHg)
 #' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
 #' @return Haemoglobin saturation as fraction
-
 kelman_po2_to_so2 <- function(po2, temperature=37, ph=7.40, pco2=5.332895, inputs_are_kpa=TRUE) {
+
+  # error checking
+  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa)
+  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa)
+  temperature_param_check(temperature)
+  ph_param_check(ph)
+
+  # function body
+
+  if (inputs_are_kpa) {
+    po2_mmhg <- kpa_to_mmhg(po2)
+    pco2_mmhg <- kpa_to_mmhg(pco2)
+  } else {
+    po2_mmhg <- po2
+    pco2_mmhg <- pco2
+  }
+
+  # po2_mmHg_virtual <- po2_mmhg * 10^(0.024*(37-temperature) + 0.4*(ph - 7.40) + 0.06*(log10(40) - log10(pco2_mmhg)))
+  po2_mmHg_virtual <- kelman_virtual_po2(po2=po2_mmhg, pco2=pco2_mmhg, temperature=temperature, ph=ph, inputs_are_kpa=FALSE)
+
+  return(std_kelman_po2_to_so2(po2_mmHg_virtual, inputs_are_kpa = FALSE))
+}
+
+#' Calculate virtual pO2.
+#'
+#' \code{kelman_virtual_po2} calculates a 'virtual po2', a pO2 corrected for ph pco2 and temperature, as
+#' per the method described by \insertCite{kelman_1966}{co2ntent}.
+
+#'
+#' @references{
+#'   \insertRef{kelman_1966}{co2ntent}
+#' }
+#'
+#' @export
+#'
+#' @param po2 O2 partial pressure
+#' @param pco2 CO2 partial pressure. Default 5.332895kPa (40mmHg)
+#' @param temperature temperature in celcius. Default 37c
+#' @param ph pH (hydrogen ion concentration). Default 7.40
+#' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
+#' @return Haemoglobin saturation as fraction
+kelman_virtual_po2 <- function(po2, pco2, temperature=37, ph=7.4, inputs_are_kpa=TRUE) {
 
   # error checking
   po2_param_check(po2, inputs_are_kpa=inputs_are_kpa)
@@ -82,5 +123,11 @@ kelman_po2_to_so2 <- function(po2, temperature=37, ph=7.40, pco2=5.332895, input
 
   po2_mmHg_virtual <- po2_mmhg * 10^(0.024*(37-temperature) + 0.4*(ph - 7.40) + 0.06*(log10(40) - log10(pco2_mmhg)))
 
-  return(std_kelman_po2_to_so2(po2_mmHg_virtual, inputs_are_kpa = FALSE))
+  if (inputs_are_kpa) {
+    ret_po2s <- mmhg_to_kpa(po2_mmHg_virtual)
+  } else {
+    ret_po2s <- po2_mmHg_virtual
+  }
+   return(ret_po2s)
 }
+
