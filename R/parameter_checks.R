@@ -13,10 +13,10 @@
 pco2_param_check <- function(pco2, inputs_are_kpa=TRUE) {
 
   if(inputs_are_kpa) {
-    max_pco2 <- 20
+    max_pco2 <- 30
     min_pco2 <- 1
   } else {
-    max_pco2 <- kpa_to_mmhg(20)
+    max_pco2 <- kpa_to_mmhg(30)
     min_pco2 <- kpa_to_mmhg(1)
   }
   # error checking temperature
@@ -106,11 +106,11 @@ temperature_param_check <- function(temperature) {
 #'
 #'
 ph_param_check <- function(ph) {
-  if (max(ph) > 7.7) {
+  if (max(ph) > 7.8) {
     warning(paste0("ph parameter contains high values: ", max(ph)))
   }
 
-  if (min(ph) < 6.8) {
+  if (min(ph) < 6.5) {
     warning(paste0("ph parameter contains low values: ", min(ph)))
 
   }
