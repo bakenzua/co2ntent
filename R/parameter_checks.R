@@ -48,10 +48,10 @@ pco2_param_check <- function(pco2, inputs_are_kpa=TRUE) {
 po2_param_check <- function(po2, inputs_are_kpa=TRUE) {
 
   if(inputs_are_kpa) {
-    max_po2 <- 20
+    max_po2 <- 100
     min_po2 <- 1
   } else {
-    max_po2 <- kpa_to_mmhg(20)
+    max_po2 <- kpa_to_mmhg(100)
     min_po2 <- kpa_to_mmhg(1)
   }
   # error checking temperature
