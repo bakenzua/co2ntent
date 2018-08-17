@@ -24,6 +24,12 @@
 #'
 blood_oxygen_content_mls_dl <- function(po2, so2_fraction, haemoglobin_g_dl, hufners_constant=1.31, inputs_are_kpa=TRUE) {
 
+  # error checking
+  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa)
+  so2_fraction_param_check(so2_fraction)
+  haemoglobin_g_dl_param_check(haemoglobin_g_dl)
+
+  # function body
   if (inputs_are_kpa) {
     dissolved_o2_ml_dl <- 0.0225 * po2
   } else {
