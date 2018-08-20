@@ -5,7 +5,8 @@
 \title{Calculate the O2 content of blood}
 \usage{
 blood_oxygen_content_mls_dl(po2, so2_fraction, haemoglobin_g_dl,
-  hufners_constant = 1.31, inputs_are_kpa = TRUE)
+  hufners_constant = 1.306, inputs_are_kpa = TRUE,
+  skip_range_check = FALSE)
 }
 \arguments{
 \item{po2}{O2 partial pressure}
@@ -14,9 +15,11 @@ blood_oxygen_content_mls_dl(po2, so2_fraction, haemoglobin_g_dl,
 
 \item{haemoglobin_g_dl}{Haemoglobin g/dL. No default}
 
-\item{hufners_constant}{Oxygen capacity of human haemoglobin. Default 1.31 ml/g}
+\item{hufners_constant}{Oxygen capacity of human haemoglobin. Default 1.306 ml/g}
 
 \item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 The O2 content of blood in ml/dL
@@ -28,12 +31,13 @@ Calculates the oxygen content of blood in mls per 100ml.
 The majority of oxygen in blood is bound to haemoglobin, which is dependent upon
 haemoglobin oxygen saturation and haemoglobin concentration. The total oxygen capacity of
 haemoglobin is described by Hüfner’s constant, which is not constant but variable depending
-on author/literature source or c. This function uses a value of 1.31 ml/g as per \insertCite{lumb_nunns_2010}{co2ntent}.
+on author/literature source or c. This function uses a value of 1.306 ml/g as per \insertCite{gregory_1974}{co2ntent}.
 \insertCite{gorelov_2008}{co2ntent} delimits this variability.
 }
 \references{
 {
   \insertRef{gorelov_2008}{co2ntent}
+  \insertRef{gregory_1974}{co2ntent}
   \insertRef{lumb_nunns_2010}{co2ntent}
 }
 }

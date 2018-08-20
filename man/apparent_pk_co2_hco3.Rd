@@ -4,12 +4,14 @@
 \alias{apparent_pk_co2_hco3}
 \title{Calculate the apparent pK' of the CO2-Bicarbonate system in blood.}
 \usage{
-apparent_pk_co2_hco3(temperature = 37, ph = 7.4)
+apparent_pk_co2_hco3(temperature = 37, ph = 7.4, skip_range_check = FALSE)
 }
 \arguments{
 \item{temperature}{Plasma Temperature in Celcius. Default 37c}
 
 \item{ph}{Plasma pH. Default 7.40}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 The apparent pK'

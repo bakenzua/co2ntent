@@ -4,10 +4,12 @@
 \alias{bicarbonate_mmol_dl_param_check}
 \title{Check vector of HCO3 values.}
 \usage{
-bicarbonate_mmol_dl_param_check(hco3_mmols_dl)
+bicarbonate_mmol_dl_param_check(hco3_mmols_dl, skip_range_check = FALSE)
 }
 \arguments{
 \item{hco3_mmols_dl}{Bicarbonate mmol/dL.}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 No return value.

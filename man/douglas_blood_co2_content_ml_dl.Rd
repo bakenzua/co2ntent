@@ -5,7 +5,8 @@
 \title{Calculate CO2 content of whole blood via Douglas method}
 \usage{
 douglas_blood_co2_content_ml_dl(pco2, haemoglobin_g_dl, so2_fraction,
-  ph = 7.4, temperature = 37, inputs_are_kpa = TRUE)
+  ph = 7.4, temperature = 37, inputs_are_kpa = TRUE,
+  skip_range_check = FALSE)
 }
 \arguments{
 \item{pco2}{CO2 partial pressure}
@@ -19,6 +20,8 @@ douglas_blood_co2_content_ml_dl(pco2, haemoglobin_g_dl, so2_fraction,
 \item{temperature}{temperature in celcius. Default 37c}
 
 \item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 The CO2 content of plasma in ml/dL

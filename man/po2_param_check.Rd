@@ -4,12 +4,14 @@
 \alias{po2_param_check}
 \title{Check vector of pO2 values.}
 \usage{
-po2_param_check(po2, inputs_are_kpa = TRUE)
+po2_param_check(po2, inputs_are_kpa = TRUE, skip_range_check = FALSE)
 }
 \arguments{
 \item{po2}{O2 partial pressure}
 
 \item{inputs_are_kpa}{If TRUE, input pO2 is in kPa, if FALSE use mmHg}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 No return value.

@@ -5,7 +5,7 @@
 \title{Calculate virtual pO2.}
 \usage{
 kelman_virtual_po2(po2, pco2, temperature = 37, ph = 7.4,
-  inputs_are_kpa = TRUE)
+  inputs_are_kpa = TRUE, skip_range_check = FALSE)
 }
 \arguments{
 \item{po2}{O2 partial pressure}
@@ -17,6 +17,8 @@ kelman_virtual_po2(po2, pco2, temperature = 37, ph = 7.4,
 \item{ph}{pH (hydrogen ion concentration). Default 7.40}
 
 \item{inputs_are_kpa}{Input parameters are kPa, otherwise use mmHg}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 Haemoglobin saturation as fraction

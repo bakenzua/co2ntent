@@ -5,7 +5,8 @@
 \title{Calculate whole blood CO2 content as per Siggaard-Andersen method.}
 \usage{
 siggaard_andersen_blood_co2_content_mmol_dl(hco3_mmols_dl, pco2,
-  haemoglobin_g_dl, so2_fraction, ph = 7.4, inputs_are_kpa = TRUE)
+  haemoglobin_g_dl, so2_fraction, ph = 7.4, inputs_are_kpa = TRUE,
+  skip_range_check = FALSE)
 }
 \arguments{
 \item{hco3_mmols_dl}{plasma bicarbonate concentration mmols/dL}
@@ -19,6 +20,8 @@ siggaard_andersen_blood_co2_content_mmol_dl(hco3_mmols_dl, pco2,
 \item{ph}{pH (hydrogen ion concentration). Default 7.40}
 
 \item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 The CO2 content of blood in mmol/dL

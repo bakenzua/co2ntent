@@ -5,7 +5,7 @@
 \title{Calculate plasma CO2 content as per Siggaard-Andersen method.}
 \usage{
 siggaard_andersen_plasma_co2_content_mmol_dl(hco3_mmols_dl, pco2,
-  inputs_are_kpa = TRUE)
+  inputs_are_kpa = TRUE, skip_range_check = FALSE)
 }
 \arguments{
 \item{hco3_mmols_dl}{plasma bicarbonate concentration mmols/dL}
@@ -13,6 +13,8 @@ siggaard_andersen_plasma_co2_content_mmol_dl(hco3_mmols_dl, pco2,
 \item{pco2}{CO2 partial pressure}
 
 \item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 The CO2 content of plasma in mmol/dL

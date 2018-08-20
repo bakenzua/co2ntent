@@ -4,10 +4,12 @@
 \alias{so2_fraction_param_check}
 \title{Check vector of fractional SO2 values.}
 \usage{
-so2_fraction_param_check(so2_fraction)
+so2_fraction_param_check(so2_fraction, skip_range_check = FALSE)
 }
 \arguments{
 \item{so2_fraction}{Haemoglobin saturation as a fraction}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 No return value.

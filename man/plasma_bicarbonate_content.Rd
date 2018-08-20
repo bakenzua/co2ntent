@@ -5,7 +5,8 @@
 \title{Calculate plasma bicarbonate concentration as per Henderson-Hasselbach equation.}
 \usage{
 plasma_bicarbonate_content(pco2, ph = 7.4, temperature = 37,
-  calculate_solubility_coefficient = FALSE, inputs_are_kpa = TRUE)
+  calculate_solubility_coefficient = FALSE, inputs_are_kpa = TRUE,
+  skip_range_check = FALSE)
 }
 \arguments{
 \item{pco2}{CO2 partial pressure}
@@ -17,6 +18,8 @@ plasma_bicarbonate_content(pco2, ph = 7.4, temperature = 37,
 \item{calculate_solubility_coefficient}{Default FALSE}
 
 \item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 The HCO3 concentration of plasma in mmol/dL

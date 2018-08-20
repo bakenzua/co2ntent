@@ -4,10 +4,12 @@
 \alias{ph_param_check}
 \title{Check vector of ph values.}
 \usage{
-ph_param_check(ph)
+ph_param_check(ph, skip_range_check = FALSE)
 }
 \arguments{
 \item{ph}{pH (hydrogen ion concentration)}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 No return value.
