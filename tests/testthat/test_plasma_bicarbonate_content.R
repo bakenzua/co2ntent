@@ -5,7 +5,7 @@ test_that("plasma_bicarbonate_content returns correct number", {
     pco2=5,
     ph=7.4,
     temperature=37,
-    calculate_solubitity_coefficient=FALSE,
+    calculate_solubility_coefficient=FALSE,
     inputs_are_kpa=TRUE
 
   ), 17.210552, tolerance=0.000001)
