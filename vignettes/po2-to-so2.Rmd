@@ -21,7 +21,7 @@ library(co2ntent)
 
 The relationship of haemoglobin oxygen saturation $S_{O_2}$ of haemoglobin to the partial pressure of oxygen $p_{O_2}$ in blood is described by the [oxygen dissociation curve.](https://en.wikipedia.org/wiki/Oxygen%E2%80%93hemoglobin_dissociation_curve) This sigmoiodal curve describes haemoglobin's affinity for oxygen, characterising how it acquires and releases oxygen. The shape and position of the curve is affected by several factors, pH, temperature, concentration of 2,3-BPG and $p_{CO_2}$
 
-Many, increasingly accurate, models describing this relationship have been published. The two functions presented here are based on work of @kelman_1966. This model is inacccurate as $p_{O_2}$ approaches 0, but is otherwise an excellent fit to physiologically occuring values.
+The three functions presented here are based on work of @kelman_1966. This model is inacccurate as $p_{O_2}$ approaches 0, but is otherwise an excellent fit to physiologically occuring values.
 
 ## Theory
 

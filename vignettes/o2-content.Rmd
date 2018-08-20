@@ -1,8 +1,9 @@
 ---
-title: "Calculating O2 Content"
-author: "Vignette Author"
+title: "Calculating O2 Content of Blood"
+author: "B Sanderson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+bibliography: ../inst/REFERENCES.bib
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -16,50 +17,59 @@ knitr::opts_chunk$set(
 )
 ```
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+The oxygen content, or capacity, of blood is expressed as volume of oxygen gas per volume of blood, typically milliliters of oxygen per 100 milliliters of blood. Oxygen carriage is dependent on haemoglobin, where haemoglobin molecules can bind with up to four oxygen molecules. The fraction of available binding sites bound to oxygen molecules is termed the haemoglobin oxygen saturation. Oxygen carriage therefore more precisely defined as being dependent upon haemoglobin concentration in the blood and the saturation of that haemoglobin. A small amount of oxygen is carried in solution.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+The total oxygen capacity of haemoglobin is described by Hüfner’s constant, $K_H$, found experimentally to be a value of 1.306 ml/g @gregory_1974
 
-## Vignette Info
+$K_s$ is defined as the solubility coeffficient of oxygen in blood, found experimentally to be 0.0225ml/dL/kPa
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+Formally:
 
-## Styles
+$$
+\begin{equation}
+  C_{O_2} = S_{O_2} \cdot Hb \cdot K_{H} + K_s \cdot p_{O_2}
+\end{equation}
+$$
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+where:
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+$$
+\begin{aligned}
+K_H &=  1.301 ml/g\\
+K_s &=  0.0225 ml/dL/kPa\\
+\end{aligned}
+$$
 
-## Figures
+## Implementation
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+### blood_oxygen_content_mls_dl
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+`co2ntent::blood_oxygen_content_mls_dl` calculates $C_{O_2}$ from $S_{O_2}$, $p_{O_2}$ and $Hb$ parameters. Optionally an alternative value of Hüfner's constant can be provided, 1.36 being a popular value in the literature.
+
+#### Usage
+
+`blood_oxygen_content_mls_dl(po2, inputs_are_kpa = TRUE)`
+
+#### Arguments
+
+* po2	- O2 partial pressure
+* so2_fraction - Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
+* haemoglobin_g_dl - Haemoglobin g/dL. No default
+* hufners_constant  - Oxygen capacity of human haemoglobin. Default 1.306 ml/g
+* inputs_are_kpa - Input parameters are kPa, otherwise use mmHg
+
+## Examples
+
+### blood_oxygen_content_mls_dl
+
+```
+> library(co2ntent)
+>
+> blood_oxygen_content_mls_dl(po2=8, so2_fraction = 0.93, haemoglobin_g_dl = 15)
+[1] 18.4545
+> blood_oxygen_content_mls_dl(po2=8, so2_fraction = 0.93, haemoglobin_g_dl = 15, hufners_constant = 1.36)
+[1] 19.152
+>
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+## References
