@@ -14,13 +14,14 @@
 #'
 #' @param po2 O2 partial pressure
 #' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return Haemoglobin saturation as fraction
 
-std_kelman_po2_to_so2 <- function(po2, inputs_are_kpa=TRUE) {
+std_kelman_po2_to_so2 <- function(po2, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
 
 
   # error checking
-  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa)
+  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
 
   # function body
   a_1 <- -8.5322289e3
@@ -60,13 +61,14 @@ std_kelman_po2_to_so2 <- function(po2, inputs_are_kpa=TRUE) {
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param pco2 CO2 partial pressure. Default 5.332895kPa (40mmHg)
 #' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return Haemoglobin saturation as fraction
-kelman_po2_to_so2 <- function(po2, temperature=37, ph=7.40, pco2=5.332895, inputs_are_kpa=TRUE) {
+kelman_po2_to_so2 <- function(po2, temperature=37, ph=7.40, pco2=5.332895, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
 
   # error checking
-  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa)
-  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa)
-  temperature_param_check(temperature)
+  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
+  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
+  temperature_param_check(temperature, skip_range_check=skip_range_check)
   ph_param_check(ph)
 
   # function body
@@ -102,14 +104,15 @@ kelman_po2_to_so2 <- function(po2, temperature=37, ph=7.40, pco2=5.332895, input
 #' @param temperature temperature in celcius. Default 37c
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return Haemoglobin saturation as fraction
-kelman_virtual_po2 <- function(po2, pco2, temperature=37, ph=7.4, inputs_are_kpa=TRUE) {
+kelman_virtual_po2 <- function(po2, pco2, temperature=37, ph=7.4, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
 
   # error checking
-  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa)
-  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa)
-  temperature_param_check(temperature)
-  ph_param_check(ph)
+  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
+  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
+  temperature_param_check(temperature, skip_range_check=skip_range_check)
+  ph_param_check(ph, skip_range_check=skip_range_check)
 
   # function body
 

@@ -21,14 +21,21 @@
 #' @param haemoglobin_g_dl Haemoglobin g/dL. No default
 #' @param hufners_constant Oxygen capacity of human haemoglobin. Default 1.306 ml/g
 #' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The O2 content of blood in ml/dL
 #'
-blood_oxygen_content_mls_dl <- function(po2, so2_fraction, haemoglobin_g_dl, hufners_constant=1.306, inputs_are_kpa=TRUE) {
+blood_oxygen_content_mls_dl <- function(po2,
+                                        so2_fraction,
+                                        haemoglobin_g_dl,
+                                        hufners_constant=1.306,
+                                        inputs_are_kpa=TRUE,
+                                        skip_range_check=FALSE
+                                        ) {
 
   # error checking
-  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa)
-  so2_fraction_param_check(so2_fraction)
-  haemoglobin_g_dl_param_check(haemoglobin_g_dl)
+  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
+  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
+  haemoglobin_g_dl_param_check(haemoglobin_g_dl, skip_range_check=skip_range_check)
 
   # function body
   if (inputs_are_kpa) {

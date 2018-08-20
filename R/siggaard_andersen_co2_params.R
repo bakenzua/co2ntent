@@ -20,6 +20,7 @@
 #' @param temperature temperature in celcius. Default 37c
 #' @param calculate_solubility_coefficient Default FALSE
 #' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The HCO3 concentration of plasma in mmol/dL
 #'
 #'
@@ -27,13 +28,14 @@ plasma_bicarbonate_content <- function(pco2,
                                        ph=7.4,
                                        temperature=37,
                                        calculate_solubility_coefficient=FALSE,
-                                       inputs_are_kpa=TRUE
+                                       inputs_are_kpa=TRUE,
+                                       skip_range_check=FALSE
 ) {
 
   # error checking
-  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa)
-  temperature_param_check(temperature)
-  ph_param_check(ph)
+  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
+  temperature_param_check(temperature, skip_range_check=skip_range_check)
+  ph_param_check(ph, skip_range_check=skip_range_check)
 
   # function body
   if (inputs_are_kpa) {
@@ -68,16 +70,18 @@ plasma_bicarbonate_content <- function(pco2,
 #'
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The CO2 content of plasma in ml/dL
 #'
 #'
 siggaard_andersen_erythrocyte_ph <- function(so2_fraction,
-                                             ph=7.4
+                                             ph=7.4,
+                                             skip_range_check=FALSE
 ) {
 
   # error checking
-  ph_param_check(ph)
-  so2_fraction_param_check(so2_fraction)
+  ph_param_check(ph, skip_range_check=skip_range_check)
+  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
 
   # function body
   ret_val <- 7.19 + (0.77 * (ph - 7.4)) + (0.035 * (1 - so2_fraction))
@@ -98,16 +102,18 @@ siggaard_andersen_erythrocyte_ph <- function(so2_fraction,
 #'
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The CO2 content of plasma in ml/dL
 #'
 #'
 siggaard_andersen_erythrocyte_p_k <- function(so2_fraction,
-                                             ph=7.4
+                                              ph=7.4,
+                                              skip_range_check=FALSE
 ) {
 
   # error checking
-  ph_param_check(ph)
-  so2_fraction_param_check(so2_fraction)
+  ph_param_check(ph, skip_range_check=skip_range_check)
+  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
 
   # function body
   ret_val <- 6.125 - log10(1 + 10^(siggaard_andersen_erythrocyte_ph(so2_fraction=so2_fraction, ph = ph) - 7.84 - (0.06 * so2_fraction)))

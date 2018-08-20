@@ -10,13 +10,14 @@
 #' @export
 #'
 #' @param temperature Plasma Temperature in Celcius. Default 37c
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return s The solubility coefficient of CO2 in plasma mmol/dL/kPa
 
-co2_plasma_solubility <- function(temperature=37) {
+co2_plasma_solubility <- function(temperature=37, skip_range_check=FALSE) {
 
 
   # error checking
-  temperature_param_check(temperature)
+  temperature_param_check(temperature, skip_range_check=skip_range_check)
 
   # function method
   t_var <- 37 - temperature
@@ -37,14 +38,15 @@ co2_plasma_solubility <- function(temperature=37) {
 #'
 #' @param temperature Plasma Temperature in Celcius. Default 37c
 #' @param ph Plasma pH. Default 7.40
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The apparent pK'
 
-apparent_pk_co2_hco3 <- function(temperature=37, ph=7.4) {
+apparent_pk_co2_hco3 <- function(temperature=37, ph=7.4, skip_range_check=FALSE) {
 
 
   # error checking
-  temperature_param_check(temperature)
-  ph_param_check(ph)
+  temperature_param_check(temperature, skip_range_check=skip_range_check)
+  ph_param_check(ph, skip_range_check=skip_range_check)
 
   # function body
   ph_var <- 7.4 - ph

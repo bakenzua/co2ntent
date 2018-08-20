@@ -22,19 +22,21 @@
 #' @param temperature temperature in celcius. Default 37c
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The CO2 content of plasma in ml/dL
 #'
 #'
 douglas_plasma_co2_content_ml_dl <- function(pco2,
                                              temperature=37,
                                              ph=7.4,
-                                             inputs_are_kpa=TRUE
+                                             inputs_are_kpa=TRUE,
+                                             skip_range_check=FALSE
                                              ) {
 
   # error checking
-  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa)
-  temperature_param_check(temperature)
-  ph_param_check(ph)
+  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
+  temperature_param_check(temperature, skip_range_check=skip_range_check)
+  ph_param_check(ph, skip_range_check=skip_range_check)
 
   # function body
   if (inputs_are_kpa) {
@@ -72,19 +74,21 @@ douglas_plasma_co2_content_ml_dl <- function(pco2,
 #' @param haemoglobin_g_dl Haemoglobin g/dL. No default
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The CO2 content Plasma:Blood ratio
 #'
 #'
 douglas_co2_plasma_to_blood_ratio <- function(haemoglobin_g_dl,
-                                                 so2_fraction,
-                                                 ph=7.4
+                                              so2_fraction,
+                                              ph=7.4,
+                                              skip_range_check=FALSE
                                                  ) {
 
 
   # error checking
-  ph_param_check(ph)
-  so2_fraction_param_check(so2_fraction)
-  haemoglobin_g_dl_param_check(haemoglobin_g_dl)
+  ph_param_check(ph, skip_range_check=skip_range_check)
+  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
+  haemoglobin_g_dl_param_check(haemoglobin_g_dl, skip_range_check=skip_range_check)
 
   # function body
   ret_val <- (1 - ((0.0289 * haemoglobin_g_dl)/((3.352 - (0.456 * so2_fraction))*(8.142 - ph))))
@@ -114,6 +118,7 @@ douglas_co2_plasma_to_blood_ratio <- function(haemoglobin_g_dl,
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param temperature temperature in celcius. Default 37c
 #' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
+#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The CO2 content of plasma in ml/dL
 #'
 #'
@@ -122,14 +127,15 @@ douglas_blood_co2_content_ml_dl <- function(pco2,
                                        so2_fraction,
                                        ph=7.4,
                                        temperature=37,
-                                       inputs_are_kpa=TRUE
+                                       inputs_are_kpa=TRUE,
+                                       skip_range_check=FALSE
                                        ) {
 
   # error checking
-  temperature_param_check(temperature)
-  ph_param_check(ph)
-  so2_fraction_param_check(so2_fraction)
-  haemoglobin_g_dl_param_check(haemoglobin_g_dl)
+  temperature_param_check(temperature, skip_range_check=skip_range_check)
+  ph_param_check(ph, skip_range_check=skip_range_check)
+  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
+  haemoglobin_g_dl_param_check(haemoglobin_g_dl, skip_range_check=skip_range_check)
 
   # function body
   if (inputs_are_kpa) {
