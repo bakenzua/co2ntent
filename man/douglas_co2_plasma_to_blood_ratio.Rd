@@ -4,7 +4,8 @@
 \alias{douglas_co2_plasma_to_blood_ratio}
 \title{Calculate the plasma to blood CO2 content ratio via Douglas method}
 \usage{
-douglas_co2_plasma_to_blood_ratio(haemoglobin_g_dl, so2_fraction, ph = 7.4)
+douglas_co2_plasma_to_blood_ratio(haemoglobin_g_dl, so2_fraction, ph = 7.4,
+  skip_range_check = FALSE)
 }
 \arguments{
 \item{haemoglobin_g_dl}{Haemoglobin g/dL. No default}
@@ -12,6 +13,8 @@ douglas_co2_plasma_to_blood_ratio(haemoglobin_g_dl, so2_fraction, ph = 7.4)
 \item{so2_fraction}{Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0}
 
 \item{ph}{pH (hydrogen ion concentration). Default 7.40}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 The CO2 content Plasma:Blood ratio

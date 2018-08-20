@@ -4,10 +4,12 @@
 \alias{co2_plasma_solubility}
 \title{Calculate the solubility coefficient of CO2 in plasma.}
 \usage{
-co2_plasma_solubility(temperature = 37)
+co2_plasma_solubility(temperature = 37, skip_range_check = FALSE)
 }
 \arguments{
 \item{temperature}{Plasma Temperature in Celcius. Default 37c}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 s The solubility coefficient of CO2 in plasma mmol/dL/kPa

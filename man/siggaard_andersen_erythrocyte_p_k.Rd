@@ -4,12 +4,15 @@
 \alias{siggaard_andersen_erythrocyte_p_k}
 \title{Calculate Erythrocyte pK as per Siggaard-Andersen method.}
 \usage{
-siggaard_andersen_erythrocyte_p_k(so2_fraction, ph = 7.4)
+siggaard_andersen_erythrocyte_p_k(so2_fraction, ph = 7.4,
+  skip_range_check = FALSE)
 }
 \arguments{
 \item{so2_fraction}{Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0}
 
 \item{ph}{pH (hydrogen ion concentration). Default 7.40}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 The CO2 content of plasma in ml/dL

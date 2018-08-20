@@ -5,7 +5,7 @@
 \title{Calculate SO2 from pO2 of blood.}
 \usage{
 kelman_po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895,
-  inputs_are_kpa = TRUE)
+  inputs_are_kpa = TRUE, skip_range_check = FALSE)
 }
 \arguments{
 \item{po2}{O2 partial pressure}
@@ -17,6 +17,8 @@ kelman_po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895,
 \item{pco2}{CO2 partial pressure. Default 5.332895kPa (40mmHg)}
 
 \item{inputs_are_kpa}{Input parameters are kPa, otherwise use mmHg}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 Haemoglobin saturation as fraction

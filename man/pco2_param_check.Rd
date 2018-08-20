@@ -4,12 +4,14 @@
 \alias{pco2_param_check}
 \title{Check vector of pCO2 values.}
 \usage{
-pco2_param_check(pco2, inputs_are_kpa = TRUE)
+pco2_param_check(pco2, inputs_are_kpa = TRUE, skip_range_check = FALSE)
 }
 \arguments{
 \item{pco2}{CO2 partial pressure}
 
 \item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 No return value.

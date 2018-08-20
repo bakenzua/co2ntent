@@ -10,11 +10,11 @@ test_that("pco2_param_check raises warning on low value", {
 })
 
 test_that("pco2_param_check raises warning on high value", {
-  pco2s_kpa = 22
+  pco2s_kpa = 31
   expect_warning(pco2_param_check(pco2s_kpa))
-  pco2s_kpa = c(5,5,5,22)
+  pco2s_kpa = c(5,5,5,31)
   expect_warning(pco2_param_check(pco2s_kpa))
-  pco2s_mmHg = 200
+  pco2s_mmHg = 235
   expect_warning(pco2_param_check(pco2s_mmHg, inputs_are_kpa=FALSE))
 })
 

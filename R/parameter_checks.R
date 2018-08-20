@@ -22,7 +22,7 @@ pco2_param_check <- function(pco2, inputs_are_kpa=TRUE, skip_range_check=FALSE) 
   }
 
   # error checking
-  if (skip_range_check) {
+  if (!skip_range_check) {
     if (max(pco2) > max_pco2) {
       warning(paste0("pco2 parameter contains high values: ", max(pco2)))
     }
@@ -61,7 +61,7 @@ po2_param_check <- function(po2, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
   }
 
   # error checking
-  if (skip_range_check) {
+  if (!skip_range_check) {
     if (max(po2) > max_po2) {
       warning(paste0("po2 parameter contains high values: ", max(po2)))
     }
@@ -90,7 +90,7 @@ po2_param_check <- function(po2, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
 #'
 temperature_param_check <- function(temperature, skip_range_check=FALSE) {
   # error checking temperature
-  if (skip_range_check) {
+  if (!skip_range_check) {
     if (max(temperature) > 44) {
       warning(paste0("temperature parameter contains high values: ", max(temperature)))
     }
@@ -118,7 +118,7 @@ temperature_param_check <- function(temperature, skip_range_check=FALSE) {
 #'
 #'
 ph_param_check <- function(ph, skip_range_check=FALSE) {
-  if (skip_range_check) {
+  if (!skip_range_check) {
     if (max(ph) > 7.8) {
       warning(paste0("ph parameter contains high values: ", max(ph)))
     }
@@ -147,7 +147,7 @@ ph_param_check <- function(ph, skip_range_check=FALSE) {
 #'
 #'
 so2_fraction_param_check <- function(so2_fraction, skip_range_check=FALSE) {
-  if (skip_range_check) {
+  if (!skip_range_check) {
     if (max(so2_fraction) > 1) {
       warning(paste0("so2_fraction parameter contains high values: ", max(so2_fraction)))
     }
@@ -176,7 +176,7 @@ so2_fraction_param_check <- function(so2_fraction, skip_range_check=FALSE) {
 #'
 #'
 haemoglobin_g_dl_param_check <- function(haemoglobin_g_dl, skip_range_check=FALSE) {
-  if (skip_range_check) {
+  if (!skip_range_check) {
     if (max(haemoglobin_g_dl) > 20) {
       warning(paste0("haemoglobin_g_dl parameter contains high values: ", max(haemoglobin_g_dl)))
     }
@@ -205,7 +205,7 @@ haemoglobin_g_dl_param_check <- function(haemoglobin_g_dl, skip_range_check=FALS
 #'
 #'
 bicarbonate_mmol_dl_param_check <- function(hco3_mmols_dl, skip_range_check=FALSE) {
-  if (skip_range_check) {
+  if (!skip_range_check) {
     if (max(hco3_mmols_dl) > 75) {
       warning(paste0("hco3_mmols_dl parameter contains high values: ", max(hco3_mmols_dl)))
     }

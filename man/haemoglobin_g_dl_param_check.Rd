@@ -4,10 +4,12 @@
 \alias{haemoglobin_g_dl_param_check}
 \title{Check vector of Haemoglobin values.}
 \usage{
-haemoglobin_g_dl_param_check(haemoglobin_g_dl)
+haemoglobin_g_dl_param_check(haemoglobin_g_dl, skip_range_check = FALSE)
 }
 \arguments{
 \item{haemoglobin_g_dl}{Haemoglobin g/dL.}
+
+\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 No return value.
