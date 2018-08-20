@@ -46,7 +46,7 @@ plasma_bicarbonate_content <- function(pco2,
 
 
   if (calculate_solubility_coefficient) {
-    s <- co2_plasma_solubility(temperature = temperature)
+    s <- co2_plasma_solubility(temperature = temperature, skip_range_check=skip_range_check)
   } else {
     s <- 0.023
   }
@@ -116,7 +116,7 @@ siggaard_andersen_erythrocyte_p_k <- function(so2_fraction,
   so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
 
   # function body
-  ret_val <- 6.125 - log10(1 + 10^(siggaard_andersen_erythrocyte_ph(so2_fraction=so2_fraction, ph = ph) - 7.84 - (0.06 * so2_fraction)))
+  ret_val <- 6.125 - log10(1 + 10^(siggaard_andersen_erythrocyte_ph(so2_fraction=so2_fraction, ph = ph, skip_range_check=skip_range_check) - 7.84 - (0.06 * so2_fraction)))
 
   return(ret_val)
 }

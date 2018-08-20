@@ -46,9 +46,9 @@ douglas_plasma_co2_content_ml_dl <- function(pco2,
   }
 
   ret_val <- 2.226 *
-                co2ntent::co2_plasma_solubility(temperature) *
+                co2ntent::co2_plasma_solubility(temperature, skip_range_check=skip_range_check) *
                 pco2_mmhg *
-                (1 + 10^(ph - co2ntent::apparent_pk_co2_hco3(temperature, ph)))
+                (1 + 10^(ph - co2ntent::apparent_pk_co2_hco3(temperature, ph, skip_range_check=skip_range_check)))
 
   return(ret_val)
 }
@@ -146,12 +146,14 @@ douglas_blood_co2_content_ml_dl <- function(pco2,
 
   ret_val <- douglas_co2_plasma_to_blood_ratio(haemoglobin_g_dl,
                                                               so2_fraction,
-                                                              ph=ph
+                                                              ph=ph,
+                                                              skip_range_check=skip_range_check
              ) *
              douglas_plasma_co2_content_ml_dl(pco2=pco2_mmhg,
                                               temperature=temperature,
                                               ph=ph,
-                                              inputs_are_kpa=FALSE
+                                              inputs_are_kpa=FALSE,
+                                              skip_range_check=skip_range_check
              )
 
   return(ret_val)

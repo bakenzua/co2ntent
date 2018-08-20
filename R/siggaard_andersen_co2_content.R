@@ -84,9 +84,9 @@ siggaard_andersen_blood_co2_content_mmol_dl <- function(hco3_mmols_dl,
     pco2_mmhg <- pco2
   }
 
-  ph_minus_pk <- siggaard_andersen_erythrocyte_ph(so2_fraction, ph) - siggaard_andersen_erythrocyte_p_k(so2_fraction, ph)
+  ph_minus_pk <- siggaard_andersen_erythrocyte_ph(so2_fraction=so2_fraction, ph=ph, skip_range_check=skip_range_check) - siggaard_andersen_erythrocyte_p_k(so2_fraction=so2_fraction, ph=ph, skip_range_check=skip_range_check)
 
   ret_val <- (0.000768 * pco2_mmhg * haemoglobin_g_dl * (1 + 10^ph_minus_pk)) +
-                  (siggaard_andersen_plasma_co2_content_mmol_dl(hco3_mmols_dl, pco2_mmhg, FALSE) * (1 - (haemoglobin_g_dl / 33.8)))
+                  (siggaard_andersen_plasma_co2_content_mmol_dl(hco3_mmols_dl=hco3_mmols_dl, pco2=pco2_mmhg, inputs_are_kpa=FALSE, skip_range_check=skip_range_check) * (1 - (haemoglobin_g_dl / 33.8)))
   return(ret_val)
 }

@@ -82,9 +82,9 @@ kelman_po2_to_so2 <- function(po2, temperature=37, ph=7.40, pco2=5.332895, input
   }
 
   # po2_mmHg_virtual <- po2_mmhg * 10^(0.024*(37-temperature) + 0.4*(ph - 7.40) + 0.06*(log10(40) - log10(pco2_mmhg)))
-  po2_mmHg_virtual <- kelman_virtual_po2(po2=po2_mmhg, pco2=pco2_mmhg, temperature=temperature, ph=ph, inputs_are_kpa=FALSE)
+  po2_mmHg_virtual <- kelman_virtual_po2(po2=po2_mmhg, pco2=pco2_mmhg, temperature=temperature, ph=ph, inputs_are_kpa=FALSE, skip_range_check=skip_range_check)
 
-  return(std_kelman_po2_to_so2(po2_mmHg_virtual, inputs_are_kpa = FALSE))
+  return(std_kelman_po2_to_so2(po2_mmHg_virtual, inputs_are_kpa = FALSE, skip_range_check=skip_range_check))
 }
 
 #' Calculate virtual pO2.
