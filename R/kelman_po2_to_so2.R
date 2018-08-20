@@ -81,10 +81,12 @@ kelman_po2_to_so2 <- function(po2, temperature=37, ph=7.40, pco2=5.332895, input
     pco2_mmhg <- pco2
   }
 
-  # po2_mmHg_virtual <- po2_mmhg * 10^(0.024*(37-temperature) + 0.4*(ph - 7.40) + 0.06*(log10(40) - log10(pco2_mmhg)))
+  #po2_mmHg_virtual <- po2_mmhg * 10^(0.024*(37-temperature) + 0.4*(ph - 7.40) + 0.06*(log10(40) - log10(pco2_mmhg)))
   po2_mmHg_virtual <- kelman_virtual_po2(po2=po2_mmhg, pco2=pco2_mmhg, temperature=temperature, ph=ph, inputs_are_kpa=FALSE, skip_range_check=skip_range_check)
 
-  return(std_kelman_po2_to_so2(po2_mmHg_virtual, inputs_are_kpa = FALSE, skip_range_check=skip_range_check))
+  ret_val <- std_kelman_po2_to_so2(po2_mmHg_virtual, inputs_are_kpa = FALSE, skip_range_check=skip_range_check)
+
+  return(ret_val)
 }
 
 #' Calculate virtual pO2.
@@ -123,6 +125,9 @@ kelman_virtual_po2 <- function(po2, pco2, temperature=37, ph=7.4, inputs_are_kpa
     po2_mmhg <- po2
     pco2_mmhg <- pco2
   }
+
+  # prevent log10(-Inf) being calculated and thus NA values returning in po2_mmHg_virtual
+  pco2_mmhg[pco2_mmhg == 0] <- 0.000000000001
 
   po2_mmHg_virtual <- po2_mmhg * 10^(0.024*(37-temperature) + 0.4*(ph - 7.40) + 0.06*(log10(40) - log10(pco2_mmhg)))
 
