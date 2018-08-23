@@ -41,46 +41,54 @@ names(co2ntent::douglas_table_3)
 
 co2ntent::douglas_table_3 %>%
   # calculate douglas plasma content
-  mutate(douglas_calculated_content_plasma = pmap_dbl(
+  mutate(douglas_calculated_content_plasma_ml_dl = pmap_dbl(
     list(
       pco2=pco2_torr,
       ph=ph
     ),
     douglas_plasma_co2_content_ml_dl,
     inputs_are_kpa=FALSE
-    
+
   )) %>%
   # calculate douglas blood content
-  mutate(douglas_calculated_content_blood = pmap_dbl(
+  mutate(douglas_calculated_content_blood_ml_dl = pmap_dbl(
     list(
-      pco2=pco2_torr, 
-      haemoglobin_g_dl=haemoglobin_g_dl, 
-      so2_fraction=so2_fraction, 
+      pco2=pco2_torr,
+      haemoglobin_g_dl=haemoglobin_g_dl,
+      so2_fraction=so2_fraction,
       ph=ph
     ),
     douglas_blood_co2_content_ml_dl,
     inputs_are_kpa=FALSE
-    
+
   )) %>%
   # calculate hco3
-  mutate(plasma_hco3 = map2_dbl(pco2_torr, ph, plasma_bicarbonate_content, inputs_are_kpa=FALSE)) %>%
+  mutate(plasma_hco3_mmol_l = map2_dbl(pco2_torr, ph, siggaard_andersen_plasma_bicarbonate_content_mmol_l, inputs_are_kpa=FALSE)) %>%
   # calculate siggaard plasma content
-  mutate(siggaard_calculated_content_plasma_mmols = map2_dbl(plasma_hco3, pco2_torr, siggaard_andersen_plasma_co2_content_mmol_dl, inputs_are_kpa=FALSE)) %>%
+  mutate(siggaard_calculated_content_plasma_mmol_l = map2_dbl(plasma_hco3_mmol_l, pco2_torr, siggaard_andersen_plasma_co2_content_mmol_l, inputs_are_kpa=FALSE)) %>%
   # calculate siggaard blood content
-  mutate(siggaard_calculated_content_blood_mmols = pmap_dbl(
+  mutate(siggaard_calculated_content_blood_mmol_l = pmap_dbl(
     list(
-      hco3_mmols_dl=plasma_hco3,
-      pco2=pco2_torr, 
-      haemoglobin_g_dl=haemoglobin_g_dl, 
-      so2_fraction=so2_fraction, 
+      hco3_mmols_l=plasma_hco3_mmol_l,
+      pco2=pco2_torr,
+      haemoglobin_g_dl=haemoglobin_g_dl,
+      so2_fraction=so2_fraction,
       ph=ph
     ),
-    siggaard_andersen_blood_co2_content_mmol_dl,
+    siggaard_andersen_blood_co2_content_mmol_l,
     inputs_are_kpa=FALSE
-    
+
   )) %>%
   # units conversion
-  mutate(siggaard_calculated_content_plasma_mls = map_dbl(siggaard_calculated_content_plasma_mmols, mmols_dl_to_mls_dl)) %>%
-  mutate(siggaard_calculated_content_blood_mls = map_dbl(siggaard_calculated_content_blood_mmols, mmols_dl_to_mls_dl)) -> df
+  mutate(siggaard_calculated_content_plasma_ml_dl = map_dbl(siggaard_calculated_content_plasma_mmol_l, mmols_l_to_mls_dl)) %>%
+  mutate(siggaard_calculated_content_blood_ml_dl = map_dbl(siggaard_calculated_content_blood_mmol_l, mmols_l_to_mls_dl)) %>%
+  select(blood_co2_content_ml_dl, douglas_calculated_content_blood_ml_dl, siggaard_calculated_content_blood_ml_dl) %>%
+  gather(calculated_method, calculated_content, -blood_co2_content_ml_dl) %>%
+  ggplot(aes(blood_co2_content_ml_dl, calculated_content, colour=calculated_method)) + geom_point() +
+    geom_smooth(method='lm') +
+    geom_abline(slope=1, intercept=0) + 
+    theme_classic() +
+    labs(title="Comparison of methods of CO2 content calculation vs Actual Content\nOriginal data from Loeppky, Luft, and Fletcher (1983)")
+
 
 ```
