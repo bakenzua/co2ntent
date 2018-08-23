@@ -199,23 +199,23 @@ haemoglobin_g_dl_param_check <- function(haemoglobin_g_dl, skip_range_check=FALS
 #' physiological range. If abnormal values are seen, a warning is raised. If missing values are
 #' found an error is raised. Abnormal values are defined as HCO3 < 2 mmol/dL  or HCO3 > 75 mmol/dL
 #'
-#' @param hco3_mmols_dl Bicarbonate mmol/dL.
+#' @param hco3_mmols_l Bicarbonate mmol/L.
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return No return value.
 #'
 #'
-bicarbonate_mmol_dl_param_check <- function(hco3_mmols_dl, skip_range_check=FALSE) {
+bicarbonate_mmol_l_param_check <- function(hco3_mmols_l, skip_range_check=FALSE) {
   if (!skip_range_check) {
-    if (max(hco3_mmols_dl) > 75) {
-      warning(paste0("hco3_mmols_dl parameter contains high values: ", max(hco3_mmols_dl)))
+    if (max(hco3_mmols_l) > 75) {
+      warning(paste0("hco3_mmols_dl parameter contains high values: ", max(hco3_mmols_l)))
     }
 
-    if (min(hco3_mmols_dl) < 2) {
-      warning(paste0("hco3_mmols_dl parameter contains low values: ", min(hco3_mmols_dl)))
+    if (min(hco3_mmols_l) < 2) {
+      warning(paste0("hco3_mmols_dl parameter contains low values: ", min(hco3_mmols_l)))
     }
   }
 
-  if (sum(is.na(hco3_mmols_dl)) > 0) {
+  if (sum(is.na(hco3_mmols_l)) > 0) {
     stop("hco3_mmols_dl parameter contains missing values")
   }
 }

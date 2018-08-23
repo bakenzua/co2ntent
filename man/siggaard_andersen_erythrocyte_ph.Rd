@@ -15,7 +15,7 @@ siggaard_andersen_erythrocyte_ph(so2_fraction, ph = 7.4,
 \item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
-The CO2 content of plasma in ml/dL
+The erythrocyte pH
 }
 \description{
 \code{siggard_a_erythrocyte_ph} calculates erythrocyte pH via the method described

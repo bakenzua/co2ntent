@@ -1,21 +1,20 @@
-context("plasma_bicarbonate_content")
+context("siggaard_andersen_plasma_bicarbonate_content_mmol_l")
 
-test_that("plasma_bicarbonate_content returns correct number", {
-  expect_equal(plasma_bicarbonate_content(
+test_that("siggaard_andersen_plasma_bicarbonate_content_mmol_l returns correct number", {
+  expect_equal(siggaard_andersen_plasma_bicarbonate_content_mmol_l(
     pco2=5,
     ph=7.4,
     temperature=37,
-    calculate_solubility_coefficient=FALSE,
     inputs_are_kpa=TRUE
 
-  ), 17.210552, tolerance=0.000001)
+  ), 22.846537295717454, tolerance=0.000001)
 
-  expect_equal(plasma_bicarbonate_content(pco2=5), 17.210552, tolerance=0.000001)
+  expect_equal(siggaard_andersen_plasma_bicarbonate_content_mmol_l(pco2=5), 22.846537295717454, tolerance=0.000001)
 })
 
-test_that("plasma_bicarbonate_content is vectorised", {
+test_that("siggaard_andersen_plasma_bicarbonate_content_mmol_l is vectorised", {
   pco2s <- c(5,5,6)
-  expected <- c(17.210552, 17.210552, 20.652663)
+  expected <- c(22.846537295717454, 22.846537295717454, 27.415844)
 
-  expect_equal(plasma_bicarbonate_content(pco2=pco2s), expected, tolerance=0.000001)
+  expect_equal(siggaard_andersen_plasma_bicarbonate_content_mmol_l(pco2=pco2s), expected, tolerance=0.000001)
 })

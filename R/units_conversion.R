@@ -22,26 +22,28 @@ kpa_to_mmhg <- function(p) {
   return(p * (760000/101325))
 }
 
-#' Convert mmols/dL to mls/dL
+#' Convert mmols/L to mls/dL
 #'
 #' @export
 #'
-#' @param mmols_dl Content in mmols/dL
+#' @param mmols_l Content in mmols/L
 #' @return Content in mls/dL
 
-mmols_dl_to_mls_dl <- function(mmols_dl) {
+mmols_l_to_mls_dl <- function(mmols_l) {
 
-  return(mmols_dl * 2.4789598)
+  # return(mmols_dl * 2.4789598)
+  return(mmols_l * 2.2710980)
 }
 
-#' Convert mls/dL to mmols/dL
+#' Convert mls/dL to mmols/L
 #'
 #' @export
 #'
 #' @param mls_dl Content in mls/dL
-#' @return Content in mmols/dL
+#' @return Content in mmols/L
 
-mls_dl_to_mmols_dl <- function(mls_dl) {
+mls_dl_to_mmols_l <- function(mls_dl) {
 
-  return(mls_dl / 2.4789598)
+  # return(mls_dl / 2.4789598)
+  return(mls_dl / 2.2710980)
 }

@@ -5,8 +5,8 @@
 #'
 #' CO2 content of plasma is calculated from plasma temperature, pH, the calculated solubilty
 #' coefficient of CO2 in plasma and the apparent pK of the CO2-HCO3 equilibrium of plasma.
-#' The latter two parameters are calculated by \code{co2ntent::co2_plasma_solubility} and
-#' \code{co2ntent::apparent_pk_co2_hco3}.
+#' The latter two parameters are calculated by \code{co2ntent::douglas_co2_plasma_solubility} and
+#' \code{co2ntent::douglas_apparent_pk_co2_hco3}.
 #'
 #' The formulae published by \insertCite{douglas_1988}{co2ntent} uses a factor
 #' of 2.226 to convert plasma co2 content to ml/dL. This is an interesting choice of
@@ -46,9 +46,9 @@ douglas_plasma_co2_content_ml_dl <- function(pco2,
   }
 
   ret_val <- 2.226 *
-                co2ntent::co2_plasma_solubility(temperature, skip_range_check=skip_range_check) *
+                co2ntent::douglas_co2_plasma_solubility(temperature, skip_range_check=skip_range_check) *
                 pco2_mmhg *
-                (1 + 10^(ph - co2ntent::apparent_pk_co2_hco3(temperature, ph, skip_range_check=skip_range_check)))
+                (1 + 10^(ph - co2ntent::douglas_apparent_pk_co2_hco3(temperature, ph, skip_range_check=skip_range_check)))
 
   return(ret_val)
 }
