@@ -1,12 +1,11 @@
 #' Calculate plasma bicarbonate concentration as per Henderson-Hasselbach equation.
 #'
-#' \code{plasma_bicarbonate_content} plasma bicarbonate concentration as per the
+#' \code{siggaard_andersen_plasma_bicarbonate_content_mmol_l} plasma bicarbonate concentration as per the
 #' Henderson-Hasselbach equationv described by \insertCite{siggaard_1988}{co2ntent}.
 #'
 #' Calculation is a straightforward Henderson-Hasselbach rearrangement. This relies
 #' on the solubility coeffiecient of CO2 in plasma. \insertCite{siggaard_1988}{co2ntent}
-#' provide a constant of 0.230 mmol/L/kPa, or we can calculate with the method provided
-#' by \insertCite{douglas_1988}{co2ntent} implemented as \code{\link{co2_plasma_solubility}}
+#' provide a constant of 0.230 mmol/L/kPa.
 #'
 #' @references{
 #'   \insertRef{douglas_1988}{co2ntent}
@@ -18,16 +17,14 @@
 #' @param pco2 CO2 partial pressure
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param temperature temperature in celcius. Default 37c
-#' @param calculate_solubility_coefficient Default FALSE
 #' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The HCO3 concentration of plasma in mmol/dL
 #'
 #'
-plasma_bicarbonate_content <- function(pco2,
+siggaard_andersen_plasma_bicarbonate_content_mmol_l <- function(pco2,
                                        ph=7.4,
                                        temperature=37,
-                                       calculate_solubility_coefficient=FALSE,
                                        inputs_are_kpa=TRUE,
                                        skip_range_check=FALSE
 ) {
@@ -39,19 +36,17 @@ plasma_bicarbonate_content <- function(pco2,
 
   # function body
   if (inputs_are_kpa) {
-    pco2_mmhg <- kpa_to_mmhg(pco2)
+    pco2_kpa <- pco2
   } else {
-    pco2_mmhg <- pco2
+    pco2_kpa <- mmhg_to_kpa(pco2)
   }
 
+  s <- 0.231  #  mmol / L / kPa
+  # s <- mmhg_to_kpa(0.023) # 0.003066414 mmol/dl/mmhg
 
-  if (calculate_solubility_coefficient) {
-    s <- co2_plasma_solubility(temperature = temperature, skip_range_check=skip_range_check)
-  } else {
-    s <- 0.023
-  }
+  pk_p <- 6.125 - log10(1 + 10^(ph - 8.7))
 
-  ret_val <- s * pco2_mmhg * (10^(ph - 6.1))
+  ret_val <- s * pco2_kpa * (10^(ph - pk_p))
 
   return(ret_val)
 }
@@ -71,7 +66,7 @@ plasma_bicarbonate_content <- function(pco2,
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
-#' @return The CO2 content of plasma in ml/dL
+#' @return The erythrocyte pH
 #'
 #'
 siggaard_andersen_erythrocyte_ph <- function(so2_fraction,
@@ -103,7 +98,7 @@ siggaard_andersen_erythrocyte_ph <- function(so2_fraction,
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
-#' @return The CO2 content of plasma in ml/dL
+#' @return The erythrocyte pK
 #'
 #'
 siggaard_andersen_erythrocyte_p_k <- function(so2_fraction,

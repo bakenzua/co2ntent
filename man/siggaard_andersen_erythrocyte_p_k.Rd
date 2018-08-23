@@ -15,7 +15,7 @@ siggaard_andersen_erythrocyte_p_k(so2_fraction, ph = 7.4,
 \item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
-The CO2 content of plasma in ml/dL
+The erythrocyte pK
 }
 \description{
 \code{siggaard_andersen_erythrocyte_p_k} calculates erythrocyte pK via the method described

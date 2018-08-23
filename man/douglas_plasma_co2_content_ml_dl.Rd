@@ -28,8 +28,8 @@ CO2 content of plasma via the method described by \insertCite{douglas_1988}{co2n
 \details{
 CO2 content of plasma is calculated from plasma temperature, pH, the calculated solubilty
 coefficient of CO2 in plasma and the apparent pK of the CO2-HCO3 equilibrium of plasma.
-The latter two parameters are calculated by \code{co2ntent::co2_plasma_solubility} and
-\code{co2ntent::apparent_pk_co2_hco3}.
+The latter two parameters are calculated by \code{co2ntent::douglas_co2_plasma_solubility} and
+\code{co2ntent::douglas_apparent_pk_co2_hco3}.
 
 The formulae published by \insertCite{douglas_1988}{co2ntent} uses a factor
 of 2.226 to convert plasma co2 content to ml/dL. This is an interesting choice of
