@@ -1,10 +1,10 @@
 #' Calculate SO2 from pO2 of blood.
 #'
-#'\code{std_kelman_po2_to_so2} calculates haemoglobin oxygen saturation from partial pressure of oxygen in blood
+#'\code{kelman_std_po2_to_so2} calculates haemoglobin oxygen saturation from partial pressure of oxygen in blood
 #' viathe method described by \insertCite{kelman_1966}{co2ntent}. This form makes no correction for acid/base
 #' disturbance, assuming pH=7.4, temperature=37c and pCO2=40mmHg
 #'
-#' @note \code{kelman_po2_to_so2} doesn't work for po2 < 0.5kpa as returned SO2 can become negative
+#' @note \code{kelman_std_po2_to_so2} doesn't work for po2 < 0.5kpa as returned SO2 can become negative
 #'
 #' @references{
 #'   \insertRef{kelman_1966}{co2ntent}
@@ -17,7 +17,7 @@
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return Haemoglobin saturation as fraction
 
-std_kelman_po2_to_so2 <- function(po2, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
+kelman_std_po2_to_so2 <- function(po2, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
 
 
   # error checking
@@ -84,7 +84,7 @@ kelman_po2_to_so2 <- function(po2, temperature=37, ph=7.40, pco2=5.332895, input
   #po2_mmHg_virtual <- po2_mmhg * 10^(0.024*(37-temperature) + 0.4*(ph - 7.40) + 0.06*(log10(40) - log10(pco2_mmhg)))
   po2_mmHg_virtual <- kelman_virtual_po2(po2=po2_mmhg, pco2=pco2_mmhg, temperature=temperature, ph=ph, inputs_are_kpa=FALSE, skip_range_check=skip_range_check)
 
-  ret_val <- std_kelman_po2_to_so2(po2_mmHg_virtual, inputs_are_kpa = FALSE, skip_range_check=skip_range_check)
+  ret_val <- kelman_std_po2_to_so2(po2_mmHg_virtual, inputs_are_kpa = FALSE, skip_range_check=skip_range_check)
 
   return(ret_val)
 }
