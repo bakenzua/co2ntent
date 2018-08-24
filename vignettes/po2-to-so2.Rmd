@@ -1,0 +1,152 @@
+---
+title: "Calculating SO2 from pO2"
+author: "B Sanderson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+bibliography: ../inst/REFERENCES.bib
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(tidyverse)
+library(co2ntent)
+```
+
+The relationship of haemoglobin oxygen saturation $S_{O_2}$ of haemoglobin to the partial pressure of oxygen $p_{O_2}$ in blood is described by the [oxygen dissociation curve.](https://en.wikipedia.org/wiki/Oxygen%E2%80%93hemoglobin_dissociation_curve) This sigmoiodal curve describes haemoglobin's affinity for oxygen, characterising how it acquires and releases oxygen. The shape and position of the curve is affected by several factors, pH, temperature, concentration of 2,3-BPG and $p_{CO_2}$
+
+The three functions presented here are based on work of @kelman_1966. This model is inacccurate as $p_{O_2}$ approaches 0, but is otherwise an excellent fit to physiologically occuring values.
+
+## Theory
+
+The mathematical model @kelman_1966 used to describe the dissociation curve takes the following form:
+
+$$
+\begin{equation}
+  S_{O_2} = 100 \cdot \frac {a_1 \cdot p_{O_2} + a_2 \cdot p_{O_2}^2 + a_3 \cdot p_{O_2}^3 + p_{O_2}^4}{a_5 \cdot p_{O_2} + a_6 \cdot p_{O_2}^2 + a_7 \cdot p_{O_2}^3 + p_{O_2}^4}
+\end{equation}
+$$
+
+where:
+
+$$
+\begin{aligned}
+a_1 &=  -8.5322289 \times 10^3 \\
+a_2 &=  2.1214010 \times 10^3 \\
+a_3 &=  -6.7073989 \times 10^1 \\
+a_4 &=  9.3596087 \times 10^5 \\
+a_5 &=  -3.1346258 \times 10^4 \\
+a_6 &=  2.3961674 \times 10^3 \\
+a_7 &=  -6.7104406 \times 10^1
+\end{aligned}
+$$
+
+To account for respiratory, metabolic and temperature disturbances to the oxygen affinity of haemoglobin requires that a transform be applied to the $p_{O_2}$ before the preceding calculation can be performed. @kelman_1966 defines the transform to $p_{O_2}virtual$ as:
+
+$$
+\begin{equation}
+p_{O_2}virtual = p_{O_2} \times 10^{(0.024\cdot(37-temp) + 0.40\cdot(pH - 7.40) + 0.06\cdot(log_{10}(40) - log_{10}(p_{CO_2})))} 
+\end{equation}
+$$
+
+## Implementation
+
+### std_kelman_po2_to_so2
+`co2ntent::std_kelman_po2_to_so2` calculates $S_{O_2}$ from $p_{O_2}$ in blood via the seven coefficient model described above. This function makes no correction for acid/base disturbance, assuming pH=7.4, temperature=37c and pCO2=40mmHg
+
+#### Usage
+
+`std_kelman_po2_to_so2(po2, inputs_are_kpa = TRUE)`
+
+#### Arguments
+
+* po2	- O2 partial pressure
+* inputs_are_kpa - Input parameters are kPa, otherwise use mmHg
+
+### kelman_virtual_po2
+`kelman_virtual_po2` calculates 'virtual po2', a pO2 corrected for ph, pco2 and temperature.
+
+#### Usage
+
+`kelman_virtual_po2(po2, pco2, temperature = 37, ph = 7.4, inputs_are_kpa = TRUE)`
+
+#### Arguments
+
+* po2 - O2 partial pressure
+* pco2 - CO2 partial pressure. Default 5.332895kPa (40mmHg)
+* temperature	- temperature in celcius. Default 37c
+* ph - pH (hydrogen ion concentration). Default 7.40
+* inputs_are_kpa - Input parameters are kPa, otherwise use mmHg
+
+### kelman_po2_to_so2
+
+`kelman_po2_to_so2` calculates haemoglobin oxygen saturation from partial pressure of oxygen in blood via the method described by (Kelman 1966). This function is a composite of the preceding two functions, and will apply the transform from $p_{O_2}$ to $p_{O_2}virtual$ and then calculate $S_{O_2}$ from the result.
+
+#### Usage
+
+`kelman_po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895, inputs_are_kpa = TRUE)`
+
+#### Arguments
+
+* po2 - O2 partial pressure
+* pco2 - CO2 partial pressure. Default 5.332895kPa (40mmHg)
+* temperature	- temperature in celcius. Default 37c
+* ph - pH (hydrogen ion concentration). Default 7.40
+* inputs_are_kpa - Input parameters are kPa, otherwise use mmHg
+
+## Examples
+
+### std_kelman_po2_to_so2
+
+```
+> library(co2ntent)
+>
+> std_kelman_po2_to_so2(po2=8)
+[1] 0.9105911
+>
+> po2_kpa <- c(8,9,10,11,12)
+> std_kelman_po2_to_so2(po2=po2_kpa)
+[1] 0.9105911 0.9352465 0.9507951 0.9610931 0.9682613
+>
+>
+> std_kelman_po2_to_so2(po2=(8 * 7.5), inputs_are_kpa = FALSE)
+[1] 0.9105706
+```
+
+### kelman_virtual_po2
+
+```
+> kelman_virtual_po2(po2=8, pco2=7)
+[1] 7.870492
+>
+```
+
+### kelman_po2_to_so2
+
+```
+> kelman_po2_to_so2(po2=8, pco2=7)
+[1] 0.9064238
+> kelman_po2_to_so2(po2=8, pco2=7, temperature=39, ph=7.2)
+[1] 0.7924081
+```
+
+```{r, warning=FALSE, fig.width=6, fig.height=4}
+tibble(po2s = seq(0.1,20,0.1)) %>%
+  mutate(ph_7_2 = kelman_po2_to_so2(po2=po2s, ph=7.2)) %>%
+  mutate(ph_7_4 = kelman_po2_to_so2(po2=po2s, ph=7.4)) %>%
+  mutate(ph_7_6 = kelman_po2_to_so2(po2=po2s, ph=7.6)) %>%
+  gather(ph, value, -po2s) %>%
+  ggplot() + 
+    geom_line(aes(po2s, value, colour=ph), size = 1) + 
+    theme_classic() + 
+    labs(x='pO2 kpa', y='SO2', title='O2 Dissociation Curves for Increasing pH') +
+    scale_colour_discrete(labels=c("7.2", "7.4", "7.6"))
+```
+
+## References
