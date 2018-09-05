@@ -32,7 +32,7 @@ also provided.
 \code{\link{douglas_plasma_co2_content_ml_dl}}
 \code{\link{kelman_po2_to_so2}}
 \code{\link{kelman_virtual_po2}}
-\code{\link{std_kelman_po2_to_so2}}
+\code{\link{kelman_std_po2_to_so2}}
 \code{\link{siggaard_andersen_erythrocyte_ph}}
 \code{\link{siggaard_andersen_erythrocyte_p_k}}
 \code{\link{siggaard_andersen_plasma_bicarbonate_content_mmol_l}}
