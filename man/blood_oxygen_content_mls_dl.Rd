@@ -3,7 +3,8 @@
 \name{blood_oxygen_content_mls_dl}
 \alias{blood_oxygen_content_mls_dl}
 \title{Calculate the O2 content of blood}
-\usage{blood_oxygen_content_mls_dl(po2, so2_fraction, haemoglobin_g_dl,
+\usage{
+blood_oxygen_content_mls_dl(po2, so2_fraction, haemoglobin_g_dl,
   hufners_constant = 1.306, inputs_are_kpa = TRUE,
   skip_range_check = FALSE)
 }
