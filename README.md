@@ -118,8 +118,10 @@ co2ntent::douglas_table_3 |>
       x = "Actual CO2 content ml/dl",
       y = "Calculated CO2 content ml/dl",
       colour = "Calculation Method"
+    ) +
+    theme(
+      legend.position = "bottom"
     )
 
-
-
 ```
+![co2ntent_readme_plot](https://github.com/bakenzua/co2ntent/assets/17120936/16413e7c-2b5e-4776-9020-979757e1bc0a)
