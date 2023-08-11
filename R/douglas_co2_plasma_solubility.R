@@ -13,11 +13,9 @@
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return s The solubility coefficient of CO2 in plasma mmol/dL/kPa
 
-douglas_co2_plasma_solubility <- function(temperature=37, skip_range_check=FALSE) {
-
-
+douglas_co2_plasma_solubility <- function(temperature = 37, skip_range_check = FALSE) {
   # error checking
-  temperature_param_check(temperature, skip_range_check=skip_range_check)
+  temperature_param_check(temperature, skip_range_check = skip_range_check)
 
   # function method
   t_var <- 37 - temperature

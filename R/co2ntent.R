@@ -1,4 +1,5 @@
-#' co2ntent: A package for calculating carbon dioxide and oxygen content of blood.
+#' co2ntent: A package for calculating carbon dioxide and oxygen content
+#' of blood.
 #'
 #' The co2ntent package provides several formulae for the calculation of carbon
 #' dioxide and oxygen content of the blood.

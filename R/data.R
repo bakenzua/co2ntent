@@ -25,7 +25,8 @@
 #' Table 4 - 46 arterial blood gas measurements.
 #'
 #' A dataset containing 46 arterial blood gas measurements
-#' from four patients. Presented as table 4 in \insertCite{douglas_1988}{co2ntent}
+#' from four patients. Presented as table 4 in
+#' \insertCite{douglas_1988}{co2ntent}
 #' from the work of \insertCite{jones_1970}{co2ntent}
 #'
 #' @format A data frame with 48 rows and 8 variables:

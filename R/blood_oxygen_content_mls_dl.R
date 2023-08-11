@@ -2,11 +2,13 @@
 #'
 #' Calculates the oxygen content of blood in mls per 100ml.
 #'
-#' The majority of oxygen in blood is bound to haemoglobin, which is dependent upon
-#' haemoglobin oxygen saturation and haemoglobin concentration. The total oxygen capacity of
-#' haemoglobin is described by Hüfner’s constant, which is not constant but variable depending
-#' on author/literature source or c. This function uses a value of 1.306 ml/g as per \insertCite{gregory_1974}{co2ntent}.
-#' \insertCite{gorelov_2008}{co2ntent} delimits this variability.
+#' The majority of oxygen in blood is bound to haemoglobin, which is dependent
+#' upon haemoglobin oxygen saturation and haemoglobin concentration.
+#' The total oxygen capacity of haemoglobin is described by Hüfner’s constant,
+#' which is not "constant" but variable depending on author/literature source
+#' or c. This function uses a value of 1.306 ml/g as per
+#' \insertCite{gregory_1974}{co2ntent}. \insertCite{gorelov_2008}{co2ntent}
+#' delimits this variability.
 #'
 #' @export
 #'
@@ -27,15 +29,13 @@
 blood_oxygen_content_mls_dl <- function(po2,
                                         so2_fraction,
                                         haemoglobin_g_dl,
-                                        hufners_constant=1.306,
-                                        inputs_are_kpa=TRUE,
-                                        skip_range_check=FALSE
-                                        ) {
-
+                                        hufners_constant = 1.306,
+                                        inputs_are_kpa = TRUE,
+                                        skip_range_check = FALSE) {
   # error checking
-  po2_param_check(po2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
-  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
-  haemoglobin_g_dl_param_check(haemoglobin_g_dl, skip_range_check=skip_range_check)
+  po2_param_check(po2, inputs_are_kpa = inputs_are_kpa, skip_range_check = skip_range_check)
+  so2_fraction_param_check(so2_fraction, skip_range_check = skip_range_check)
+  haemoglobin_g_dl_param_check(haemoglobin_g_dl, skip_range_check = skip_range_check)
 
   # function body
   if (inputs_are_kpa) {
@@ -44,5 +44,5 @@ blood_oxygen_content_mls_dl <- function(po2,
     dissolved_o2_ml_dl <- 0.003 * po2
   }
 
- return((so2_fraction * hufners_constant * haemoglobin_g_dl) + dissolved_o2_ml_dl)
+  return((so2_fraction * hufners_constant * haemoglobin_g_dl) + dissolved_o2_ml_dl)
 }

@@ -11,9 +11,8 @@
 #' @return No return value.
 #'
 #'
-pco2_param_check <- function(pco2, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
-
-  if(inputs_are_kpa) {
+pco2_param_check <- function(pco2, inputs_are_kpa = TRUE, skip_range_check = FALSE) {
+  if (inputs_are_kpa) {
     max_pco2 <- 30
     min_pco2 <- 1
   } else {
@@ -50,9 +49,8 @@ pco2_param_check <- function(pco2, inputs_are_kpa=TRUE, skip_range_check=FALSE) 
 #' @return No return value.
 #'
 #'
-po2_param_check <- function(po2, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
-
-  if(inputs_are_kpa) {
+po2_param_check <- function(po2, inputs_are_kpa = TRUE, skip_range_check = FALSE) {
+  if (inputs_are_kpa) {
     max_po2 <- 100
     min_po2 <- 1
   } else {
@@ -88,7 +86,7 @@ po2_param_check <- function(po2, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
 #' @return No return value.
 #'
 #'
-temperature_param_check <- function(temperature, skip_range_check=FALSE) {
+temperature_param_check <- function(temperature, skip_range_check = FALSE) {
   # error checking temperature
   if (!skip_range_check) {
     if (max(temperature) > 44) {
@@ -117,7 +115,7 @@ temperature_param_check <- function(temperature, skip_range_check=FALSE) {
 #' @return No return value.
 #'
 #'
-ph_param_check <- function(ph, skip_range_check=FALSE) {
+ph_param_check <- function(ph, skip_range_check = FALSE) {
   if (!skip_range_check) {
     if (max(ph) > 7.8) {
       warning(paste0("ph parameter contains high values: ", max(ph)))
@@ -125,7 +123,6 @@ ph_param_check <- function(ph, skip_range_check=FALSE) {
 
     if (min(ph) < 6.5) {
       warning(paste0("ph parameter contains low values: ", min(ph)))
-
     }
   }
 
@@ -137,19 +134,25 @@ ph_param_check <- function(ph, skip_range_check=FALSE) {
 
 #' Check vector of fractional SO2 values.
 #'
-#' \code{so2_fraction_param_check} checks a vector of fractional SO2 values for abnormal or missing values.
-#' If abnormal values are seen, a warning is raised. If missing values are
-#' found an error is raised. Abnormal values are defined as so2_fraction < 0  or so2_fraction > 1
+#' \code{so2_fraction_param_check} checks a vector of fractional SO2 values for
+#' abnormal or missing values. If abnormal values are seen, a warning is
+#' raised. If missing values are found an error is raised. Abnormal values
+#' are defined as so2_fraction < 0  or so2_fraction > 1
 #'
 #' @param so2_fraction Haemoglobin saturation as a fraction
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return No return value.
 #'
 #'
-so2_fraction_param_check <- function(so2_fraction, skip_range_check=FALSE) {
+so2_fraction_param_check <- function(so2_fraction, skip_range_check = FALSE) {
   if (!skip_range_check) {
     if (max(so2_fraction) > 1) {
-      warning(paste0("so2_fraction parameter contains high values: ", max(so2_fraction)))
+      warning(
+        paste0(
+          "so2_fraction parameter contains high values: ",
+          max(so2_fraction)
+        )
+      )
     }
 
     if (min(so2_fraction) < 0) {
@@ -175,7 +178,7 @@ so2_fraction_param_check <- function(so2_fraction, skip_range_check=FALSE) {
 #' @return No return value.
 #'
 #'
-haemoglobin_g_dl_param_check <- function(haemoglobin_g_dl, skip_range_check=FALSE) {
+haemoglobin_g_dl_param_check <- function(haemoglobin_g_dl, skip_range_check = FALSE) {
   if (!skip_range_check) {
     if (max(haemoglobin_g_dl) > 20) {
       warning(paste0("haemoglobin_g_dl parameter contains high values: ", max(haemoglobin_g_dl)))
@@ -204,7 +207,7 @@ haemoglobin_g_dl_param_check <- function(haemoglobin_g_dl, skip_range_check=FALS
 #' @return No return value.
 #'
 #'
-bicarbonate_mmol_l_param_check <- function(hco3_mmols_l, skip_range_check=FALSE) {
+bicarbonate_mmol_l_param_check <- function(hco3_mmols_l, skip_range_check = FALSE) {
   if (!skip_range_check) {
     if (max(hco3_mmols_l) > 75) {
       warning(paste0("hco3_mmols_dl parameter contains high values: ", max(hco3_mmols_l)))
@@ -219,4 +222,3 @@ bicarbonate_mmol_l_param_check <- function(hco3_mmols_l, skip_range_check=FALSE)
     stop("hco3_mmols_dl parameter contains missing values")
   }
 }
-
