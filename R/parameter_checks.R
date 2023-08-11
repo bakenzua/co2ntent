@@ -83,7 +83,7 @@ po2_param_check <- function(po2, inputs_are_kpa=TRUE, skip_range_check=FALSE) {
 #' physiological range. If abnormal values are seen, a warning is raised. If missing values are
 #' found an error is raised. Abnormal values are defined as T < 28c  or T > 44c
 #'
-#' @param temperature temperature in celcius.
+#' @param temperature temperature in celsius.
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return No return value.
 #'

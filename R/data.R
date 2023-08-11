@@ -1,6 +1,6 @@
 #' Table 3 - 38 arterial and venous blood gas measurements.
 #'
-#' A dataset containing 38 venous and arterial blood gas measurents
+#' A dataset containing 38 venous and arterial blood gas measurements
 #' from five patients. Presented as table 3 in \insertCite{douglas_1988}{co2ntent}
 #' from the work of \insertCite{loeppky_1983}{co2ntent}
 #'
@@ -24,7 +24,7 @@
 
 #' Table 4 - 46 arterial blood gas measurements.
 #'
-#' A dataset containing 46 arterial blood gas measurents
+#' A dataset containing 46 arterial blood gas measurements
 #' from four patients. Presented as table 4 in \insertCite{douglas_1988}{co2ntent}
 #' from the work of \insertCite{jones_1970}{co2ntent}
 #'

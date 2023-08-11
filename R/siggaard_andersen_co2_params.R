@@ -1,10 +1,10 @@
-#' Calculate plasma bicarbonate concentration as per Henderson-Hasselbach equation.
+#' Calculate plasma bicarbonate concentration as per Henderson-Hasselbalch equation.
 #'
 #' \code{siggaard_andersen_plasma_bicarbonate_content_mmol_l} plasma bicarbonate concentration as per the
-#' Henderson-Hasselbach equationv described by \insertCite{siggaard_1988}{co2ntent}.
+#' Henderson-Hasselbalch equation described by \insertCite{siggaard_1988}{co2ntent}.
 #'
-#' Calculation is a straightforward Henderson-Hasselbach rearrangement. This relies
-#' on the solubility coeffiecient of CO2 in plasma. \insertCite{siggaard_1988}{co2ntent}
+#' Calculation is a straightforward Henderson-Hasselbalch rearrangement. This relies
+#' on the solubility coefficient of CO2 in plasma. \insertCite{siggaard_1988}{co2ntent}
 #' provide a constant of 0.230 mmol/L/kPa.
 #'
 #' @references{

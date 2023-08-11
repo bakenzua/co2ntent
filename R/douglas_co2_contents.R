@@ -3,7 +3,7 @@
 #' \code{douglas_plasma_co2_content_ml_dl} calculates a hypothetical intermediary
 #' CO2 content of plasma via the method described by \insertCite{douglas_1988}{co2ntent}.
 #'
-#' CO2 content of plasma is calculated from plasma temperature, pH, the calculated solubilty
+#' CO2 content of plasma is calculated from plasma temperature, pH, the calculated solubility
 #' coefficient of CO2 in plasma and the apparent pK of the CO2-HCO3 equilibrium of plasma.
 #' The latter two parameters are calculated by \code{co2ntent::douglas_co2_plasma_solubility} and
 #' \code{co2ntent::douglas_apparent_pk_co2_hco3}.
@@ -19,7 +19,7 @@
 #' @export
 #'
 #' @param pco2 CO2 partial pressure
-#' @param temperature temperature in celcius. Default 37c
+#' @param temperature temperature in celsius. Default 37c
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
@@ -116,7 +116,7 @@ douglas_co2_plasma_to_blood_ratio <- function(haemoglobin_g_dl,
 #' @param haemoglobin_g_dl Haemoglobin g/dL. No default
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
-#' @param temperature temperature in celcius. Default 37c
+#' @param temperature temperature in celsius. Default 37c
 #' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The CO2 content of plasma in ml/dL

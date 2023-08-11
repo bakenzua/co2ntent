@@ -57,7 +57,7 @@ kelman_std_po2_to_so2 <- function(po2, inputs_are_kpa=TRUE, skip_range_check=FAL
 #' @export
 #'
 #' @param po2 O2 partial pressure
-#' @param temperature temperature in celcius. Default 37c
+#' @param temperature temperature in celsius. Default 37c
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param pco2 CO2 partial pressure. Default 5.332895kPa (40mmHg)
 #' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
@@ -103,7 +103,7 @@ kelman_po2_to_so2 <- function(po2, temperature=37, ph=7.40, pco2=5.332895, input
 #'
 #' @param po2 O2 partial pressure
 #' @param pco2 CO2 partial pressure. Default 5.332895kPa (40mmHg)
-#' @param temperature temperature in celcius. Default 37c
+#' @param temperature temperature in celsius. Default 37c
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE

@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-#' @param temperature Plasma Temperature in Celcius. Default 37c
+#' @param temperature Plasma Temperature in Celsius. Default 37c
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return s The solubility coefficient of CO2 in plasma mmol/dL/kPa
 

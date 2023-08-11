@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-#' @param temperature Plasma Temperature in Celcius. Default 37c
+#' @param temperature Plasma Temperature in Celsius. Default 37c
 #' @param ph Plasma pH. Default 7.40
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The apparent pK'

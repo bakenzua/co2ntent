@@ -12,9 +12,6 @@
 #' Several helper methods for units conversion and other minor tasks are
 #' provided.
 #'
-#' Carbon dioxide content calculation models derived by the author are
-#' also provided.
-#'
 #' @section co2ntent functions:
 #'
 #' \code{\link{douglas_apparent_pk_co2_hco3}}
