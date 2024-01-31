@@ -28,7 +28,7 @@ devtools::install_github("bakenzua/co2ntent")
 Example
 -------
 
-This is an example demonstrating how `co2tent` can be used with tidyvverse functions on the inbuilt dataset.
+This is an example demonstrating how `con2tent` can be used with tidyvverse functions on the inbuilt dataset.
 
 ``` r
 library(tidyverse)
