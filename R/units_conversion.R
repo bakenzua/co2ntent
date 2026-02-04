@@ -1,49 +1,49 @@
 #' Convert mmHg to kPa
 #'
-#' @export
+#' Convert pressure from millimetres of mercury (mmHg) to kilopascals (kPa).
 #'
-#' @param p Pressure in mmHg
-#' @return Pressure in kPa
-
+#' @param p Numeric vector of pressures in mmHg. NA values are preserved.
+#' @return Numeric vector of pressures in kPa (same length and names as `p`).
+#' @examples
+#' mmhg_to_kpa(c(760, 380, NA))
+#' @seealso kpa_to_mmhg
+#' @note 1 atm = 760 mmHg = 101.325 kPa.
+#' @export
 mmhg_to_kpa <- function(p) {
-
-  return(p / (760000/101325))
+  kpa_per_mmhg <- 101.325 / 760
+  if (!is.numeric(p)) {
+    stop("`p` must be numeric.")
+  }
+  if (length(p) == 0) {
+    numeric(0)
+  } else {
+    out <- p * kpa_per_mmhg
+    if (!is.null(names(p))) names(out) <- names(p)
+    out
+  }
 }
 
 #' Convert kPa to mmHg
 #'
-#' @export
+#' Convert pressure from kilopascals (kPa) to millimetres of mercury (mmHg).
 #'
-#' @param p Pressure in kPa
-#' @return Pressure in mmHg
-
+#' @param p Numeric vector of pressures in kPa. NA values are preserved.
+#' @return Numeric vector of pressures in mmHg (same length and names as `p`).
+#' @examples
+#' kpa_to_mmhg(c(101.325, 50.6625, NA))
+#' @seealso mmhg_to_kpa
+#' @export
 kpa_to_mmhg <- function(p) {
-
-  return(p * (760000/101325))
+  mmhg_per_kpa <- 760 / 101.325
+  if (!is.numeric(p)) {
+    stop("`p` must be numeric.")
+  }
+  if (length(p) == 0) {
+    numeric(0)
+  } else {
+    out <- p * mmhg_per_kpa
+    if (!is.null(names(p))) names(out) <- names(p)
+    out
+  }
 }
 
-#' Convert mmols/L to mls/dL
-#'
-#' @export
-#'
-#' @param mmols_l Content in mmols/L
-#' @return Content in mls/dL
-
-mmols_l_to_mls_dl <- function(mmols_l) {
-
-  # return(mmols_dl * 2.4789598)
-  return(mmols_l * 2.2710980)
-}
-
-#' Convert mls/dL to mmols/L
-#'
-#' @export
-#'
-#' @param mls_dl Content in mls/dL
-#' @return Content in mmols/L
-
-mls_dl_to_mmols_l <- function(mls_dl) {
-
-  # return(mls_dl / 2.4789598)
-  return(mls_dl / 2.2710980)
-}
