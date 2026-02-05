@@ -8,10 +8,6 @@
 #' The latter two parameters are calculated by \code{co2ntent::douglas_co2_plasma_solubility} and
 #' \code{co2ntent::douglas_apparent_pk_co2_hco3}.
 #'
-#' The formulae published by \insertCite{douglas_1988}{co2ntent} uses a factor
-#' of 2.226 to convert plasma co2 content to ml/dL. This is an interesting choice of
-#' molar volume, as it is inaccurate.
-#'
 #' @references{
 #'   \insertRef{douglas_1988}{co2ntent}
 #' }
@@ -45,7 +41,7 @@ douglas_plasma_co2_content_ml_dl <- function(pco2,
     pco2_mmhg <- pco2
   }
 
-  ret_val <- 2.226 *
+  ret_val <- .molar_volume_defaults()["co2"] *
                 co2ntent::douglas_co2_plasma_solubility(temperature, skip_range_check=skip_range_check) *
                 pco2_mmhg *
                 (1 + 10^(ph - co2ntent::douglas_apparent_pk_co2_hco3(temperature, ph, skip_range_check=skip_range_check)))
@@ -158,3 +154,4 @@ douglas_blood_co2_content_ml_dl <- function(pco2,
 
   return(ret_val)
 }
+

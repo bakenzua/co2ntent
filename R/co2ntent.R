@@ -29,6 +29,5 @@
 #' \code{\link{siggaard_andersen_plasma_co2_content_mmol_l}}
 #' \code{\link{siggaard_andersen_blood_co2_content_mmol_l}}
 #'
-#' @docType package
-#' @name co2ntent
-NULL
+#' @keywords internal
+"_PACKAGE"
