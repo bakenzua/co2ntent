@@ -4,9 +4,14 @@
 \alias{blood_oxygen_content_mls_dl}
 \title{Calculate the O2 content of blood}
 \usage{
-blood_oxygen_content_mls_dl(po2, so2_fraction, haemoglobin_g_dl,
-  hufners_constant = 1.306, inputs_are_kpa = TRUE,
-  skip_range_check = FALSE)
+blood_oxygen_content_mls_dl(
+  po2,
+  so2_fraction,
+  haemoglobin_g_dl,
+  hufners_constant = 1.306,
+  inputs_are_kpa = TRUE,
+  skip_range_check = FALSE
+)
 }
 \arguments{
 \item{po2}{O2 partial pressure}
@@ -28,11 +33,13 @@ The O2 content of blood in ml/dL
 Calculates the oxygen content of blood in mls per 100ml.
 }
 \details{
-The majority of oxygen in blood is bound to haemoglobin, which is dependent upon
-haemoglobin oxygen saturation and haemoglobin concentration. The total oxygen capacity of
-haemoglobin is described by Hüfner’s constant, which is not constant but variable depending
-on author/literature source or c. This function uses a value of 1.306 ml/g as per \insertCite{gregory_1974}{co2ntent}.
-\insertCite{gorelov_2008}{co2ntent} delimits this variability.
+The majority of oxygen in blood is bound to haemoglobin, which is dependent
+upon haemoglobin oxygen saturation and haemoglobin concentration.
+The total oxygen capacity of haemoglobin is described by Hüfner’s constant,
+which is not "constant" but variable depending on author/literature source
+or c. This function uses a value of 1.306 ml/g as per
+\insertCite{gregory_1974}{co2ntent}. \insertCite{gorelov_2008}{co2ntent}
+delimits this variability.
 }
 \references{
 {

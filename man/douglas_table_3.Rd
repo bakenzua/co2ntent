@@ -4,7 +4,8 @@
 \name{douglas_table_3}
 \alias{douglas_table_3}
 \title{Table 3 - 38 arterial and venous blood gas measurements.}
-\format{A data frame with 38 rows and 8 variables:
+\format{
+A data frame with 38 rows and 8 variables:
 \describe{
   \item{subject}{subject, of five participants}
   \item{sample_type}{type of sample, arterial or venous}
@@ -14,12 +15,13 @@
   \item{blood_co2_content_ml_dl}{CO2 content of blood in mls per decilitre}
   \item{pco2_torr}{partial pressure of CO2 in torr(mmHg)}
   \item{plasma_co2_content_ml_dl}{CO2 content of plasma in mls per decilitre}
-}}
+}
+}
 \usage{
 douglas_table_3
 }
 \description{
-A dataset containing 38 venous and arterial blood gas measurents
+A dataset containing 38 venous and arterial blood gas measurements
 from five patients. Presented as table 3 in \insertCite{douglas_1988}{co2ntent}
 from the work of \insertCite{loeppky_1983}{co2ntent}
 }

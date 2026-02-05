@@ -7,11 +7,20 @@
 mmhg_to_kpa(p)
 }
 \arguments{
-\item{p}{Pressure in mmHg}
+\item{p}{Numeric vector of pressures in mmHg. NA values are preserved.}
 }
 \value{
-Pressure in kPa
+Numeric vector of pressures in kPa (same length and names as `p`).
 }
 \description{
-Convert mmHg to kPa
+Convert pressure from millimetres of mercury (mmHg) to kilopascals (kPa).
+}
+\note{
+1 atm = 760 mmHg = 101.325 kPa.
+}
+\examples{
+mmhg_to_kpa(c(760, 380, NA))
+}
+\seealso{
+kpa_to_mmhg
 }

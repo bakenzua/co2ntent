@@ -4,13 +4,19 @@
 \alias{kelman_po2_to_so2}
 \title{Calculate SO2 from pO2 of blood.}
 \usage{
-kelman_po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895,
-  inputs_are_kpa = TRUE, skip_range_check = FALSE)
+kelman_po2_to_so2(
+  po2,
+  temperature = 37,
+  ph = 7.4,
+  pco2 = 5.332895,
+  inputs_are_kpa = TRUE,
+  skip_range_check = FALSE
+)
 }
 \arguments{
 \item{po2}{O2 partial pressure}
 
-\item{temperature}{temperature in celcius. Default 37c}
+\item{temperature}{temperature in celsius. Default 37c}
 
 \item{ph}{pH (hydrogen ion concentration). Default 7.40}
 
@@ -24,11 +30,13 @@ kelman_po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895,
 Haemoglobin saturation as fraction
 }
 \description{
-\code{kelman_po2_to_so2} calculates haemoglobin oxygen saturation from partial pressure of oxygen in blood
-via the method described by \insertCite{kelman_1966}{co2ntent}.
+\code{kelman_po2_to_so2} calculates haemoglobin oxygen saturation from
+partial pressure of oxygen in blood via the method described by
+\insertCite{kelman_1966}{co2ntent}.
 }
 \note{
-\code{kelman_po2_to_so2} doesn't work for po2 < 0.5kpa as returned SO2 can become negative
+\code{kelman_po2_to_so2} doesn't work for po2 < 0.5kpa as returned
+SO2 can become negative
 }
 \references{
 {

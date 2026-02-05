@@ -7,7 +7,7 @@
 douglas_co2_plasma_solubility(temperature = 37, skip_range_check = FALSE)
 }
 \arguments{
-\item{temperature}{Plasma Temperature in Celcius. Default 37c}
+\item{temperature}{Plasma Temperature in Celsius. Default 37c}
 
 \item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }

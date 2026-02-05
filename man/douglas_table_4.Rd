@@ -4,7 +4,8 @@
 \name{douglas_table_4}
 \alias{douglas_table_4}
 \title{Table 4 - 46 arterial blood gas measurements.}
-\format{A data frame with 48 rows and 8 variables:
+\format{
+A data frame with 48 rows and 8 variables:
 \describe{
   \item{subject}{subject, of four participants}
   \item{po2_torr}{partial pressure of O2 in torr(mmHg), contains some non numeric entries!}
@@ -14,13 +15,15 @@
   \item{blood_co2_content_ml_dl}{CO2 content of blood in mls per decilitre}
   \item{pco2_torr}{partial pressure of CO2 in torr(mmHg)}
   \item{plasma_co2_content_ml_dl}{CO2 content of plasma in mls per decilitre}
-}}
+}
+}
 \usage{
 douglas_table_4
 }
 \description{
-A dataset containing 46 arterial blood gas measurents
-from four patients. Presented as table 4 in \insertCite{douglas_1988}{co2ntent}
+A dataset containing 46 arterial blood gas measurements
+from four patients. Presented as table 4 in
+\insertCite{douglas_1988}{co2ntent}
 from the work of \insertCite{jones_1970}{co2ntent}
 }
 \references{

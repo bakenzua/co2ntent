@@ -4,11 +4,14 @@
 \alias{douglas_apparent_pk_co2_hco3}
 \title{Calculate the apparent pK' of the CO2-Bicarbonate system in blood.}
 \usage{
-douglas_apparent_pk_co2_hco3(temperature = 37, ph = 7.4,
-  skip_range_check = FALSE)
+douglas_apparent_pk_co2_hco3(
+  temperature = 37,
+  ph = 7.4,
+  skip_range_check = FALSE
+)
 }
 \arguments{
-\item{temperature}{Plasma Temperature in Celcius. Default 37c}
+\item{temperature}{Plasma Temperature in Celsius. Default 37c}
 
 \item{ph}{Plasma pH. Default 7.40}
 
@@ -19,7 +22,8 @@ The apparent pK'
 }
 \description{
 \code{douglas_apparent_pk_co2_hco3} calculates the apparent pK'of the
-CO2-Bicarbonate in blood via the formula described by \insertCite{douglas_1988}{co2ntent}.
+CO2-Bicarbonate in blood via the formula described by 
+\insertCite{douglas_1988}{co2ntent}.
 }
 \references{
 {

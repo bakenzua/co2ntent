@@ -17,12 +17,15 @@ kelman_std_po2_to_so2(po2, inputs_are_kpa = TRUE, skip_range_check = FALSE)
 Haemoglobin saturation as fraction
 }
 \description{
-\code{kelman_std_po2_to_so2} calculates haemoglobin oxygen saturation from partial pressure of oxygen in blood
-viathe method described by \insertCite{kelman_1966}{co2ntent}. This form makes no correction for acid/base
-disturbance, assuming pH=7.4, temperature=37c and pCO2=40mmHg
+\code{kelman_std_po2_to_so2} calculates haemoglobin oxygen saturation
+from partial pressure of oxygen in blood via the method described by
+\insertCite{kelman_1966}{co2ntent}. This form makes no correction
+for acid/base disturbance, assuming pH=7.4, temperature=37c and
+pCO2=40mmHg
 }
 \note{
-\code{kelman_std_po2_to_so2} doesn't work for po2 < 0.5kpa as returned SO2 can become negative
+\code{kelman_std_po2_to_so2} doesn't work for po2 < 0.5kpa as
+returned SO2 can become negative
 }
 \references{
 {

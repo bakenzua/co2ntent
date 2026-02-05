@@ -4,15 +4,21 @@
 \alias{kelman_virtual_po2}
 \title{Calculate virtual pO2.}
 \usage{
-kelman_virtual_po2(po2, pco2, temperature = 37, ph = 7.4,
-  inputs_are_kpa = TRUE, skip_range_check = FALSE)
+kelman_virtual_po2(
+  po2,
+  pco2,
+  temperature = 37,
+  ph = 7.4,
+  inputs_are_kpa = TRUE,
+  skip_range_check = FALSE
+)
 }
 \arguments{
 \item{po2}{O2 partial pressure}
 
 \item{pco2}{CO2 partial pressure. Default 5.332895kPa (40mmHg)}
 
-\item{temperature}{temperature in celcius. Default 37c}
+\item{temperature}{temperature in celsius. Default 37c}
 
 \item{ph}{pH (hydrogen ion concentration). Default 7.40}
 
@@ -24,8 +30,9 @@ kelman_virtual_po2(po2, pco2, temperature = 37, ph = 7.4,
 Haemoglobin saturation as fraction
 }
 \description{
-\code{kelman_virtual_po2} calculates a 'virtual po2', a pO2 corrected for ph pco2 and temperature, as
-per the method described by \insertCite{kelman_1966}{co2ntent}.
+\code{kelman_virtual_po2} calculates a 'virtual po2', a pO2 corrected for
+ph pco2 and temperature, as per the method described by
+\insertCite{kelman_1966}{co2ntent}.
 }
 \references{
 {

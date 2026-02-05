@@ -7,7 +7,7 @@
 temperature_param_check(temperature, skip_range_check = FALSE)
 }
 \arguments{
-\item{temperature}{temperature in celcius.}
+\item{temperature}{temperature in celsius.}
 
 \item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }

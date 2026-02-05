@@ -4,8 +4,12 @@
 \alias{siggaard_andersen_plasma_co2_content_mmol_l}
 \title{Calculate plasma CO2 content as per Siggaard-Andersen method.}
 \usage{
-siggaard_andersen_plasma_co2_content_mmol_l(hco3_mmols_l, pco2,
-  inputs_are_kpa = TRUE, skip_range_check = FALSE)
+siggaard_andersen_plasma_co2_content_mmol_l(
+  hco3_mmols_l,
+  pco2,
+  inputs_are_kpa = TRUE,
+  skip_range_check = FALSE
+)
 }
 \arguments{
 \item{hco3_mmols_l}{plasma bicarbonate concentration mmols/dL}

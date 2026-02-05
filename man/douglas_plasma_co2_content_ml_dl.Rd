@@ -4,13 +4,18 @@
 \alias{douglas_plasma_co2_content_ml_dl}
 \title{Calculate CO2 content of plasma via Douglas method}
 \usage{
-douglas_plasma_co2_content_ml_dl(pco2, temperature = 37, ph = 7.4,
-  inputs_are_kpa = TRUE, skip_range_check = FALSE)
+douglas_plasma_co2_content_ml_dl(
+  pco2,
+  temperature = 37,
+  ph = 7.4,
+  inputs_are_kpa = TRUE,
+  skip_range_check = FALSE
+)
 }
 \arguments{
 \item{pco2}{CO2 partial pressure}
 
-\item{temperature}{temperature in celcius. Default 37c}
+\item{temperature}{temperature in celsius. Default 37c}
 
 \item{ph}{pH (hydrogen ion concentration). Default 7.40}
 
@@ -26,14 +31,10 @@ The CO2 content of plasma in ml/dL
 CO2 content of plasma via the method described by \insertCite{douglas_1988}{co2ntent}.
 }
 \details{
-CO2 content of plasma is calculated from plasma temperature, pH, the calculated solubilty
+CO2 content of plasma is calculated from plasma temperature, pH, the calculated solubility
 coefficient of CO2 in plasma and the apparent pK of the CO2-HCO3 equilibrium of plasma.
 The latter two parameters are calculated by \code{co2ntent::douglas_co2_plasma_solubility} and
 \code{co2ntent::douglas_apparent_pk_co2_hco3}.
-
-The formulae published by \insertCite{douglas_1988}{co2ntent} uses a factor
-of 2.226 to convert plasma co2 content to ml/dL. This is an interesting choice of
-molar volume, as it is inaccurate.
 }
 \references{
 {

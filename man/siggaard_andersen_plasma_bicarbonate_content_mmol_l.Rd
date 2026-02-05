@@ -2,10 +2,15 @@
 % Please edit documentation in R/siggaard_andersen_co2_params.R
 \name{siggaard_andersen_plasma_bicarbonate_content_mmol_l}
 \alias{siggaard_andersen_plasma_bicarbonate_content_mmol_l}
-\title{Calculate plasma bicarbonate concentration as per Henderson-Hasselbach equation.}
+\title{Calculate plasma bicarbonate concentration as per Henderson-Hasselbalch equation.}
 \usage{
-siggaard_andersen_plasma_bicarbonate_content_mmol_l(pco2, ph = 7.4,
-  temperature = 37, inputs_are_kpa = TRUE, skip_range_check = FALSE)
+siggaard_andersen_plasma_bicarbonate_content_mmol_l(
+  pco2,
+  ph = 7.4,
+  temperature = 37,
+  inputs_are_kpa = TRUE,
+  skip_range_check = FALSE
+)
 }
 \arguments{
 \item{pco2}{CO2 partial pressure}
@@ -23,11 +28,11 @@ The HCO3 concentration of plasma in mmol/dL
 }
 \description{
 \code{siggaard_andersen_plasma_bicarbonate_content_mmol_l} plasma bicarbonate concentration as per the
-Henderson-Hasselbach equationv described by \insertCite{siggaard_1988}{co2ntent}.
+Henderson-Hasselbalch equation described by \insertCite{siggaard_1988}{co2ntent}.
 }
 \details{
-Calculation is a straightforward Henderson-Hasselbach rearrangement. This relies
-on the solubility coeffiecient of CO2 in plasma. \insertCite{siggaard_1988}{co2ntent}
+Calculation is a straightforward Henderson-Hasselbalch rearrangement. This relies
+on the solubility coefficient of CO2 in plasma. \insertCite{siggaard_1988}{co2ntent}
 provide a constant of 0.230 mmol/L/kPa.
 }
 \references{

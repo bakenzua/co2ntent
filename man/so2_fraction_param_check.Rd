@@ -15,7 +15,8 @@ so2_fraction_param_check(so2_fraction, skip_range_check = FALSE)
 No return value.
 }
 \description{
-\code{so2_fraction_param_check} checks a vector of fractional SO2 values for abnormal or missing values.
-If abnormal values are seen, a warning is raised. If missing values are
-found an error is raised. Abnormal values are defined as so2_fraction < 0  or so2_fraction > 1
+\code{so2_fraction_param_check} checks a vector of fractional SO2 values for
+abnormal or missing values. If abnormal values are seen, a warning is
+raised. If missing values are found an error is raised. Abnormal values
+are defined as so2_fraction < 0  or so2_fraction > 1
 }

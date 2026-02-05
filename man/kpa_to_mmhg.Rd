@@ -7,11 +7,17 @@
 kpa_to_mmhg(p)
 }
 \arguments{
-\item{p}{Pressure in kPa}
+\item{p}{Numeric vector of pressures in kPa. NA values are preserved.}
 }
 \value{
-Pressure in mmHg
+Numeric vector of pressures in mmHg (same length and names as `p`).
 }
 \description{
-Convert kPa to mmHg
+Convert pressure from kilopascals (kPa) to millimetres of mercury (mmHg).
+}
+\examples{
+kpa_to_mmhg(c(101.325, 50.6625, NA))
+}
+\seealso{
+mmhg_to_kpa
 }
