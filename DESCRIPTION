@@ -17,3 +17,4 @@ Imports: Rdpack
 RdMacros: Rdpack
 Depends: R (>= 2.10)
 VignetteBuilder: knitr
+URL: https://bakenzua.github.io/co2ntent/

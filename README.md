@@ -1,5 +1,4 @@
-co2ntent
--------
+# co2ntent <img src="man/figures/logo.png" align="right" height="139" />
 
 An R package for calculating carbon dioxide and oxygen content of blood.
 
@@ -28,7 +27,7 @@ devtools::install_github("bakenzua/co2ntent")
 Example
 -------
 
-This is an example demonstrating how `co2tent` can be used with tidyvverse functions on the inbuilt dataset.
+This is an example demonstrating how `con2tent` can be used with tidyverse functions on the inbuilt dataset.
 
 ``` r
 library(tidyverse)
