@@ -8,8 +8,6 @@ douglas_co2_plasma_solubility(temperature = 37, skip_range_check = FALSE)
 }
 \arguments{
 \item{temperature}{Plasma Temperature in Celsius. Default 37c}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 s The solubility coefficient of CO2 in plasma mmol/dL/kPa
@@ -23,3 +21,4 @@ of CO2 in plasma via the formula described by \insertCite{douglas_1988}{co2ntent
   \insertRef{douglas_1988}{co2ntent}
 }
 }
+\keyword{internal}

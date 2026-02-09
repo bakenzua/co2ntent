@@ -4,14 +4,12 @@
 \alias{kelman_std_po2_to_so2}
 \title{Calculate SO2 from pO2 of blood.}
 \usage{
-kelman_std_po2_to_so2(po2, inputs_are_kpa = TRUE, skip_range_check = FALSE)
+kelman_std_po2_to_so2(po2, po2_units = c("kPa", "mmHg"))
 }
 \arguments{
 \item{po2}{O2 partial pressure}
 
 \item{inputs_are_kpa}{Input parameters are kPa, otherwise use mmHg}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 Haemoglobin saturation as fraction
@@ -32,3 +30,4 @@ returned SO2 can become negative
   \insertRef{kelman_1966}{co2ntent}
 }
 }
+\keyword{internal}

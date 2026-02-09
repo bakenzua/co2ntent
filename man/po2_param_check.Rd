@@ -4,14 +4,12 @@
 \alias{po2_param_check}
 \title{Check vector of pO2 values.}
 \usage{
-po2_param_check(po2, inputs_are_kpa = TRUE, skip_range_check = FALSE)
+po2_param_check(po2, po2_units = c("kPa", "mmHg"))
 }
 \arguments{
 \item{po2}{O2 partial pressure}
 
-\item{inputs_are_kpa}{If TRUE, input pO2 is in kPa, if FALSE use mmHg}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
+\item{po2_units}{Unit for \code{po2}; one of \code{"kPa"} or \code{"mmHg"}.}
 }
 \value{
 No return value.
@@ -19,6 +17,6 @@ No return value.
 \description{
 \code{po2_param_check} checks a vector of pO2 values for abnormal or missing values.
 Abnormal values are designed to catch values entered in error rather than representing a 'normal'
-physiological range. If abnormal values are seen, a warning is raised. If missing values are
-found an error is raised. Abnormal values are defined as pO2 < 1kPa or pO2 > 100kPa
+physiological range. If abnormal values are seen, a warning is raised.
+Abnormal values are defined as pO2 < 1kPa or pO2 > 100kPa
 }

@@ -38,6 +38,13 @@ provided.
 \code{\link{siggaard_andersen_blood_co2_content_mmol_l}}
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://bakenzua.github.io/co2ntent/}
+}
+
+}
 \author{
 \strong{Maintainer}: Barnaby Akenzua-Sanderson \email{barnaby.sanderson1@nhs.net}
 

@@ -4,12 +4,10 @@
 \alias{bicarbonate_mmol_l_param_check}
 \title{Check vector of HCO3 values.}
 \usage{
-bicarbonate_mmol_l_param_check(hco3_mmols_l, skip_range_check = FALSE)
+bicarbonate_mmol_l_param_check(hco3_mmols_l)
 }
 \arguments{
 \item{hco3_mmols_l}{Bicarbonate mmol/L.}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 No return value.
@@ -17,6 +15,6 @@ No return value.
 \description{
 \code{bicarbonate_mmol_dl_param_check} checks a vector of Bicarbonate values for abnormal or missing values.
 Abnormal values are designed to catch values entered in error rather than representing a 'normal'
-physiological range. If abnormal values are seen, a warning is raised. If missing values are
-found an error is raised. Abnormal values are defined as HCO3 < 2 mmol/dL  or HCO3 > 75 mmol/dL
+physiological range. If abnormal values are seen, a warning is raised. 
+Abnormal values are defined as HCO3 < 2 mmol/dL  or HCO3 > 75 mmol/dL
 }

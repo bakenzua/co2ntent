@@ -13,16 +13,19 @@
 #'   \insertRef{kelman_1966}{co2ntent}
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @param po2 O2 partial pressure
 #' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return Haemoglobin saturation as fraction
 
-kelman_std_po2_to_so2 <- function(po2, inputs_are_kpa = TRUE, skip_range_check = FALSE) {
+kelman_std_po2_to_so2 <- function(po2, po2_units = c("kPa", "mmHg")) {
+ 
+  po2_units <- match.arg(po2_units)
   # error checking
-  po2_param_check(po2, inputs_are_kpa = inputs_are_kpa, skip_range_check = skip_range_check)
+  if (min(po2, na.rm = TRUE) < 0) {
+    stop("kelman_std_po2_to_so2: po2 can not be negative")
+  }
 
   # function body
   a_1 <- -8.5322289e3
@@ -33,8 +36,8 @@ kelman_std_po2_to_so2 <- function(po2, inputs_are_kpa = TRUE, skip_range_check =
   a_6 <- 2.3961674e3
   a_7 <- -6.7104406e1
 
-  if (inputs_are_kpa) {
-    po2_mmhg <- kpa_to_mmhg(po2)
+  if (po2_units == "kPa") {
+    po2_mmhg <- co2ntent::kpa_to_mmhg(po2)
   } else {
     po2_mmhg <- po2
   }
@@ -57,25 +60,34 @@ kelman_std_po2_to_so2 <- function(po2, inputs_are_kpa = TRUE, skip_range_check =
 #'   \insertRef{kelman_1966}{co2ntent}
 #' }
 #'
-#' @export
 #'
 #' @param po2 O2 partial pressure
 #' @param temperature temperature in celsius. Default 37c
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param pco2 CO2 partial pressure. Default 5.332895kPa (40mmHg)
-#' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
+#' @param pressure_units Input parameters are kPa, otherwise use mmHg
 #' @return Haemoglobin saturation as fraction
-kelman_po2_to_so2 <- function(po2, temperature = 37, ph = 7.40, pco2 = 5.332895, inputs_are_kpa = TRUE, skip_range_check = FALSE) {
+kelman_po2_to_so2 <- function(po2, temperature = 37, ph = 7.40, pco2 = 5.332895, pressure_units = c("kPa", "mmHg")) {
+
+  pressure_units <- match.arg(pressure_units)
+
   # error checking
-  po2_param_check(po2, inputs_are_kpa = inputs_are_kpa, skip_range_check = skip_range_check)
-  pco2_param_check(pco2, inputs_are_kpa = inputs_are_kpa, skip_range_check = skip_range_check)
-  temperature_param_check(temperature, skip_range_check = skip_range_check)
-  ph_param_check(ph, skip_range_check = skip_range_check)
+  if (min(po2, na.rm = TRUE) < 0) {
+    stop("kelman_po2_to_so2: po2 can not be negative")
+  }
+  if (min(temperature, na.rm = TRUE) < 0) {
+    stop("kelman_po2_to_so2: temperature can not be negative")
+  }
+  if (min(ph, na.rm = TRUE) < 0) {
+    stop("kelman_po2_to_so2: ph can not be negative")
+  }
+  if (min(pco2, na.rm = TRUE) < 0) {
+    stop("kelman_po2_to_so2: pco2 can not be negative")
+  }
 
   # function body
 
-  if (inputs_are_kpa) {
+  if (pressure_units == "kPa") {
     po2_mmhg <- kpa_to_mmhg(po2)
     pco2_mmhg <- kpa_to_mmhg(pco2)
   } else {
@@ -84,9 +96,9 @@ kelman_po2_to_so2 <- function(po2, temperature = 37, ph = 7.40, pco2 = 5.332895,
   }
 
   # po2_mmHg_virtual <- po2_mmhg * 10^(0.024*(37-temperature) + 0.4*(ph - 7.40) + 0.06*(log10(40) - log10(pco2_mmhg)))
-  po2_mmHg_virtual <- kelman_virtual_po2(po2 = po2_mmhg, pco2 = pco2_mmhg, temperature = temperature, ph = ph, inputs_are_kpa = FALSE, skip_range_check = skip_range_check)
+  po2_mmHg_virtual <- kelman_virtual_po2(po2 = po2_mmhg, pco2 = pco2_mmhg, temperature = temperature, ph = ph, pressure_units = "mmHg")
 
-  ret_val <- kelman_std_po2_to_so2(po2_mmHg_virtual, inputs_are_kpa = FALSE, skip_range_check = skip_range_check)
+  ret_val <- kelman_std_po2_to_so2(po2_mmHg_virtual, po2_units = "mmHg")
 
   return(ret_val)
 }
@@ -96,31 +108,42 @@ kelman_po2_to_so2 <- function(po2, temperature = 37, ph = 7.40, pco2 = 5.332895,
 #' \code{kelman_virtual_po2} calculates a 'virtual po2', a pO2 corrected for
 #' ph pco2 and temperature, as per the method described by
 #' \insertCite{kelman_1966}{co2ntent}.
-
+#' 
+#' Units for pO2 and pCO2 should be in the same units (mmHg or kPa) as specified by pressure_units.
+#' The result is returned in same units
 #'
 #' @references{
 #'   \insertRef{kelman_1966}{co2ntent}
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @param po2 O2 partial pressure
 #' @param pco2 CO2 partial pressure. Default 5.332895kPa (40mmHg)
 #' @param temperature temperature in celsius. Default 37c
 #' @param ph pH (hydrogen ion concentration). Default 7.40
-#' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
-#' @return Haemoglobin saturation as fraction
-kelman_virtual_po2 <- function(po2, pco2, temperature = 37, ph = 7.4, inputs_are_kpa = TRUE, skip_range_check = FALSE) {
+#' @param pressure_units Input parameters are kPa, otherwise use mmHg
+#' @return Vector of virtual pO2
+kelman_virtual_po2 <- function(po2, pco2, temperature = 37, ph = 7.4, pressure_units = c("kPa", "mmHg")) {
+
+  pressure_units = match.arg(pressure_units)
   # error checking
-  po2_param_check(po2, inputs_are_kpa = inputs_are_kpa, skip_range_check = skip_range_check)
-  pco2_param_check(pco2, inputs_are_kpa = inputs_are_kpa, skip_range_check = skip_range_check)
-  temperature_param_check(temperature, skip_range_check = skip_range_check)
-  ph_param_check(ph, skip_range_check = skip_range_check)
+  if (min(po2, na.rm = TRUE) < 0) {
+    stop("kelman_virtual_po2: po2 can not be negative")
+  }
+  if (min(temperature, na.rm = TRUE) < 0) {
+    stop("kelman_virtual_po2: temperature can not be negative")
+  }
+  if (min(ph, na.rm = TRUE) < 0) {
+    stop("kelman_virtual_po2: ph can not be negative")
+  }
+  if (min(pco2, na.rm = TRUE) < 0) {
+    stop("kelman_virtual_po2: pco2 can not be negative")
+  }
 
   # function body
 
-  if (inputs_are_kpa) {
+  if (pressure_units == "kPa") {
     po2_mmhg <- kpa_to_mmhg(po2)
     pco2_mmhg <- kpa_to_mmhg(pco2)
   } else {
@@ -133,7 +156,7 @@ kelman_virtual_po2 <- function(po2, pco2, temperature = 37, ph = 7.4, inputs_are
 
   po2_mmHg_virtual <- po2_mmhg * 10^(0.024 * (37 - temperature) + 0.4 * (ph - 7.40) + 0.06 * (log10(40) - log10(pco2_mmhg)))
 
-  if (inputs_are_kpa) {
+  if (pressure_units == "kPa") {
     ret_po2s <- mmhg_to_kpa(po2_mmHg_virtual)
   } else {
     ret_po2s <- po2_mmHg_virtual

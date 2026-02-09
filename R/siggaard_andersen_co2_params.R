@@ -12,36 +12,49 @@
 #'   \insertRef{siggaard_1988}{co2ntent}
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @param pco2 CO2 partial pressure
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param temperature temperature in celcius. Default 37c
-#' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
+#' @param pressure_units Unit for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.
 #' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The HCO3 concentration of plasma in mmol/dL
 #'
 #'
-siggaard_andersen_plasma_bicarbonate_content_mmol_l <- function(pco2,
-                                       ph=7.4,
-                                       temperature=37,
-                                       inputs_are_kpa=TRUE,
-                                       skip_range_check=FALSE
+siggaard_andersen_plasma_bicarbonate_content_mmol_l <- function(
+  pco2,
+  ph = 7.4,
+  temperature = 37,
+  pco2_units = c("kPa", "mmHg")
 ) {
+  pco2_units <- match.arg(pco2_units)
 
   # error checking
-  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
-  temperature_param_check(temperature, skip_range_check=skip_range_check)
-  ph_param_check(ph, skip_range_check=skip_range_check)
+  if (min(pco2, na.rm = TRUE) < 0) {
+    stop(
+      "siggaard_andersen_plasma_bicarbonate_content_mmol_l: pco2 can not be negative"
+    )
+  }
+  if (min(ph, na.rm = TRUE) < 0) {
+    stop(
+      "siggaard_andersen_plasma_bicarbonate_content_mmol_l: ph can not be negative"
+    )
+  }
+  if (min(temperature, na.rm = TRUE) < 0) {
+    stop(
+      "siggaard_andersen_plasma_bicarbonate_content_mmol_l: temperature can not be negative"
+    )
+  }
 
   # function body
-  if (inputs_are_kpa) {
+  if (pco2_units == "kPa") {
     pco2_kpa <- pco2
   } else {
     pco2_kpa <- mmhg_to_kpa(pco2)
   }
 
-  s <- 0.231  #  mmol / L / kPa
+  s <- 0.231 #  mmol / L / kPa
   # s <- mmhg_to_kpa(0.023) # 0.003066414 mmol/dl/mmhg
 
   pk_p <- 6.125 - log10(1 + 10^(ph - 8.7))
@@ -61,22 +74,24 @@ siggaard_andersen_plasma_bicarbonate_content_mmol_l <- function(pco2,
 #'   \insertRef{siggaard_1988}{co2ntent}
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The erythrocyte pH
 #'
 #'
-siggaard_andersen_erythrocyte_ph <- function(so2_fraction,
-                                             ph=7.4,
-                                             skip_range_check=FALSE
-) {
-
+siggaard_andersen_erythrocyte_ph <- function(so2_fraction, ph = 7.4) {
   # error checking
-  ph_param_check(ph, skip_range_check=skip_range_check)
-  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
+  if (min(ph, na.rm = TRUE) < 0) {
+    stop("siggaard_andersen_erythrocyte_ph: ph can not be negative")
+  }
+  if (min(so2_fraction, na.rm = TRUE) < 0) {
+    stop("siggaard_andersen_erythrocyte_ph: so2_fraction can not be negative")
+  }
+  if (max(so2_fraction, na.rm = TRUE) > 1) {
+    stop("siggaard_andersen_erythrocyte_ph: so2_fraction can not be greater than 1")
+  }
 
   # function body
   ret_val <- 7.19 + (0.77 * (ph - 7.4)) + (0.035 * (1 - so2_fraction))
@@ -93,26 +108,39 @@ siggaard_andersen_erythrocyte_ph <- function(so2_fraction,
 #'   \insertRef{siggaard_1988}{co2ntent}
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The erythrocyte pK
 #'
 #'
-siggaard_andersen_erythrocyte_p_k <- function(so2_fraction,
-                                              ph=7.4,
-                                              skip_range_check=FALSE
+siggaard_andersen_erythrocyte_p_k <- function(
+  so2_fraction,
+  ph = 7.4
 ) {
-
   # error checking
-  ph_param_check(ph, skip_range_check=skip_range_check)
-  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
+  if (min(ph, na.rm = TRUE) < 0) {
+    stop("siggaard_andersen_erythrocyte_p_k: ph can not be negative")
+  }
+  if (min(so2_fraction, na.rm = TRUE) < 0) {
+    stop("siggaard_andersen_erythrocyte_p_k: so2_fraction can not be negative")
+  }
+  if (max(so2_fraction, na.rm = TRUE) > 1) {
+    stop("siggaard_andersen_erythrocyte_p_k: so2_fraction can not be greater than 1")
+  }
 
   # function body
-  ret_val <- 6.125 - log10(1 + 10^(siggaard_andersen_erythrocyte_ph(so2_fraction=so2_fraction, ph = ph, skip_range_check=skip_range_check) - 7.84 - (0.06 * so2_fraction)))
+  ret_val <- 6.125 -
+    log10(
+      1 +
+        10^(siggaard_andersen_erythrocyte_ph(
+          so2_fraction = so2_fraction,
+          ph = ph
+        ) -
+          7.84 -
+          (0.06 * so2_fraction))
+    )
 
   return(ret_val)
 }
-

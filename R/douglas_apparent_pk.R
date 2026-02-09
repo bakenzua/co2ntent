@@ -8,17 +8,20 @@
 #'   \insertRef{douglas_1988}{co2ntent}
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @param temperature Plasma Temperature in Celsius. Default 37c
 #' @param ph Plasma pH. Default 7.40
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The apparent pK'
 
-douglas_apparent_pk_co2_hco3 <- function(temperature = 37, ph = 7.4, skip_range_check = FALSE) {
+douglas_apparent_pk_co2_hco3 <- function(temperature = 37, ph = 7.4) {
   # error checking
-  temperature_param_check(temperature, skip_range_check = skip_range_check)
-  ph_param_check(ph, skip_range_check = skip_range_check)
+  if (min(temperature, na.rm = TRUE) < 0) {
+    stop("douglas_apparent_pk_co2_hco3: temperature can not be negative")
+  }
+  if (min(ph, na.rm = TRUE) < 0) {
+    stop("douglas_apparent_pk_co2_hco3: ph can not be negative")
+  }
 
   # function body
   ph_var <- 7.4 - ph

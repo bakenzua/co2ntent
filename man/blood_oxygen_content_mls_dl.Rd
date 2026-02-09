@@ -9,8 +9,7 @@ blood_oxygen_content_mls_dl(
   so2_fraction,
   haemoglobin_g_dl,
   hufners_constant = 1.306,
-  inputs_are_kpa = TRUE,
-  skip_range_check = FALSE
+  po2_units = c("kPa", "mmHg")
 )
 }
 \arguments{
@@ -22,9 +21,7 @@ blood_oxygen_content_mls_dl(
 
 \item{hufners_constant}{Oxygen capacity of human haemoglobin. Default 1.306 ml/g}
 
-\item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
+\item{po2_units}{Unit for \code{po2}; one of \code{"kPa"} or \code{"mmHg"}. Default is "kPa".}
 }
 \value{
 The O2 content of blood in ml/dL

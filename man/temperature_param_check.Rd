@@ -4,12 +4,10 @@
 \alias{temperature_param_check}
 \title{Check vector of temperature values.}
 \usage{
-temperature_param_check(temperature, skip_range_check = FALSE)
+temperature_param_check(temperature)
 }
 \arguments{
 \item{temperature}{temperature in celsius.}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 No return value.

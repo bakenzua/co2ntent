@@ -9,8 +9,7 @@ kelman_virtual_po2(
   pco2,
   temperature = 37,
   ph = 7.4,
-  inputs_are_kpa = TRUE,
-  skip_range_check = FALSE
+  pressure_units = c("kPa", "mmHg")
 )
 }
 \arguments{
@@ -22,20 +21,23 @@ kelman_virtual_po2(
 
 \item{ph}{pH (hydrogen ion concentration). Default 7.40}
 
-\item{inputs_are_kpa}{Input parameters are kPa, otherwise use mmHg}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
+\item{pressure_units}{Input parameters are kPa, otherwise use mmHg}
 }
 \value{
-Haemoglobin saturation as fraction
+Vector of virtual pO2
 }
 \description{
 \code{kelman_virtual_po2} calculates a 'virtual po2', a pO2 corrected for
 ph pco2 and temperature, as per the method described by
 \insertCite{kelman_1966}{co2ntent}.
 }
+\details{
+Units for pO2 and pCO2 should be in the same units (mmHg or kPa) as specified by pressure_units.
+The result is returned in same units
+}
 \references{
 {
   \insertRef{kelman_1966}{co2ntent}
 }
 }
+\keyword{internal}

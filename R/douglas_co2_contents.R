@@ -12,39 +12,51 @@
 #'   \insertRef{douglas_1988}{co2ntent}
 #' }
 #'
-#' @export
 #'
 #' @param pco2 CO2 partial pressure
 #' @param temperature temperature in celsius. Default 37c
 #' @param ph pH (hydrogen ion concentration). Default 7.40
-#' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
+#' @param pco2_units Unit for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.
 #' @return The CO2 content of plasma in ml/dL
 #'
 #'
-douglas_plasma_co2_content_ml_dl <- function(pco2,
-                                             temperature=37,
-                                             ph=7.4,
-                                             inputs_are_kpa=TRUE,
-                                             skip_range_check=FALSE
-                                             ) {
+douglas_plasma_co2_content_ml_dl <- function(
+  pco2,
+  temperature = 37,
+  ph = 7.4,
+  pco2_units = c("kPa", "mmHg")
+) {
+  pco2_units <- match.arg(pco2_units)
 
   # error checking
-  pco2_param_check(pco2, inputs_are_kpa=inputs_are_kpa, skip_range_check=skip_range_check)
-  temperature_param_check(temperature, skip_range_check=skip_range_check)
-  ph_param_check(ph, skip_range_check=skip_range_check)
+  if (min(pco2, na.rm = TRUE) < 0) {
+    stop("douglas_plasma_co2_content_ml_dl: ph can not be negative")
+  }
+  if (min(temperature, na.rm = TRUE) < 0) {
+    stop("douglas_plasma_co2_content_ml_dl: temperature can not be negative")
+  }
+  if (min(ph, na.rm = TRUE) < 0) {
+    stop("douglas_plasma_co2_content_ml_dl: ph can not be negative")
+  }
 
   # function body
-  if (inputs_are_kpa) {
+  if (pco2_units == "kPa") {
     pco2_mmhg <- kpa_to_mmhg(pco2)
   } else {
     pco2_mmhg <- pco2
   }
 
   ret_val <- .molar_volume_defaults()["co2"] *
-                co2ntent::douglas_co2_plasma_solubility(temperature, skip_range_check=skip_range_check) *
-                pco2_mmhg *
-                (1 + 10^(ph - co2ntent::douglas_apparent_pk_co2_hco3(temperature, ph, skip_range_check=skip_range_check)))
+    co2ntent:::douglas_co2_plasma_solubility(
+      temperature
+    ) *
+    pco2_mmhg *
+    (1 +
+      10^(ph -
+        co2ntent:::douglas_apparent_pk_co2_hco3(
+          temperature,
+          ph
+        )))
 
   return(ret_val)
 }
@@ -65,29 +77,34 @@ douglas_plasma_co2_content_ml_dl <- function(pco2,
 #'   \insertRef{visser_1960}{co2ntent}
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @param haemoglobin_g_dl Haemoglobin g/dL. No default
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The CO2 content Plasma:Blood ratio
 #'
-#'
-douglas_co2_plasma_to_blood_ratio <- function(haemoglobin_g_dl,
-                                              so2_fraction,
-                                              ph=7.4,
-                                              skip_range_check=FALSE
-                                                 ) {
-
-
+#' @export
+douglas_co2_plasma_to_blood_ratio <- function(
+  haemoglobin_g_dl,
+  so2_fraction,
+  ph = 7.4
+) {
   # error checking
-  ph_param_check(ph, skip_range_check=skip_range_check)
-  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
-  haemoglobin_g_dl_param_check(haemoglobin_g_dl, skip_range_check=skip_range_check)
+  if (min(haemoglobin_g_dl, na.rm = TRUE) < 0) {
+    stop("douglas_co2_plasma_to_blood_ratio: haemoglobin_g_dl can not be negative")
+  }
+  if (min(so2_fraction, na.rm = TRUE) < 0 | max(so2_fraction, na.rm = TRUE) > 1) {
+    stop("douglas_co2_plasma_to_blood_ratio: haemoglobin_g_dl greater than 1")
+  }
+  if (min(ph, na.rm = TRUE) < 0) {
+    stop("douglas_co2_plasma_to_blood_ratio: ph can not be negative")
+  }
 
   # function body
-  ret_val <- (1 - ((0.0289 * haemoglobin_g_dl)/((3.352 - (0.456 * so2_fraction))*(8.142 - ph))))
+  ret_val <- (1 -
+    ((0.0289 * haemoglobin_g_dl) /
+      ((3.352 - (0.456 * so2_fraction)) * (8.142 - ph))))
   return(ret_val)
 }
 
@@ -106,52 +123,64 @@ douglas_co2_plasma_to_blood_ratio <- function(haemoglobin_g_dl,
 #'   \insertRef{douglas_1988}{co2ntent}
 #' }
 #'
-#' @export
 #'
 #' @param pco2 CO2 partial pressure
 #' @param haemoglobin_g_dl Haemoglobin g/dL. No default
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param temperature temperature in celsius. Default 37c
-#' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
+#' @param pco2_units Unit for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.
 #' @return The CO2 content of plasma in ml/dL
 #'
 #'
-douglas_blood_co2_content_ml_dl <- function(pco2,
-                                       haemoglobin_g_dl,
-                                       so2_fraction,
-                                       ph=7.4,
-                                       temperature=37,
-                                       inputs_are_kpa=TRUE,
-                                       skip_range_check=FALSE
-                                       ) {
+douglas_blood_co2_content_ml_dl <- function(
+  pco2,
+  haemoglobin_g_dl,
+  so2_fraction,
+  ph = 7.4,
+  temperature = 37,
+  pco2_units = c("kPa", "mmHg")
+) {
+  pco2_units <- match.arg(pco2_units)
 
   # error checking
-  temperature_param_check(temperature, skip_range_check=skip_range_check)
-  ph_param_check(ph, skip_range_check=skip_range_check)
-  so2_fraction_param_check(so2_fraction, skip_range_check=skip_range_check)
-  haemoglobin_g_dl_param_check(haemoglobin_g_dl, skip_range_check=skip_range_check)
+  if (min(pco2, na.rm = TRUE) < 0) {
+    stop("douglas_blood_co2_content_ml_dl: pco2 can not be negative")
+  }
+  if (min(haemoglobin_g_dl, na.rm = TRUE) < 0) {
+    stop("douglas_blood_co2_content_ml_dl: haemoglobin_g_dl can not be negative")
+  }
+  if (min(so2_fraction, na.rm = TRUE) < 0) {
+    stop("douglas_blood_co2_content_ml_dl: so2_fraction can not be negative")
+  }
+  if (max(so2_fraction, na.rm = TRUE) > 1) {
+    stop("douglas_blood_co2_content_ml_dl: so2_fraction can not be greater than 1")
+  }
+  if (min(ph, na.rm = TRUE) < 0) {
+    stop("douglas_blood_co2_content_ml_dl: ph can not be negative")
+  }
+  if (min(temperature, na.rm = TRUE) < 0) {
+    stop("douglas_blood_co2_content_ml_dl: temperature can not be negative")
+  }
 
   # function body
-  if (inputs_are_kpa) {
+  if (pco2_units == "kPa") {
     pco2_mmhg <- kpa_to_mmhg(pco2)
   } else {
     pco2_mmhg <- pco2
   }
 
-  ret_val <- douglas_co2_plasma_to_blood_ratio(haemoglobin_g_dl,
-                                                              so2_fraction,
-                                                              ph=ph,
-                                                              skip_range_check=skip_range_check
-             ) *
-             douglas_plasma_co2_content_ml_dl(pco2=pco2_mmhg,
-                                              temperature=temperature,
-                                              ph=ph,
-                                              inputs_are_kpa=FALSE,
-                                              skip_range_check=skip_range_check
-             )
+  ret_val <- douglas_co2_plasma_to_blood_ratio(
+    haemoglobin_g_dl,
+    so2_fraction,
+    ph = ph
+  ) *
+    douglas_plasma_co2_content_ml_dl(
+      pco2 = pco2_mmhg,
+      temperature = temperature,
+      ph = ph,
+      pco2_units = "mmHg"
+    )
 
   return(ret_val)
 }
-

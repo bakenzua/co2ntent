@@ -8,8 +8,7 @@ douglas_plasma_co2_content_ml_dl(
   pco2,
   temperature = 37,
   ph = 7.4,
-  inputs_are_kpa = TRUE,
-  skip_range_check = FALSE
+  pco2_units = c("kPa", "mmHg")
 )
 }
 \arguments{
@@ -19,9 +18,7 @@ douglas_plasma_co2_content_ml_dl(
 
 \item{ph}{pH (hydrogen ion concentration). Default 7.40}
 
-\item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
+\item{pco2_units}{Unit for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.}
 }
 \value{
 The CO2 content of plasma in ml/dL

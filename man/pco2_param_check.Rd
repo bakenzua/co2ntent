@@ -4,14 +4,12 @@
 \alias{pco2_param_check}
 \title{Check vector of pCO2 values.}
 \usage{
-pco2_param_check(pco2, inputs_are_kpa = TRUE, skip_range_check = FALSE)
+pco2_param_check(pco2, pco2_units = c("kPa", "mmHg"))
 }
 \arguments{
 \item{pco2}{CO2 partial pressure}
 
-\item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
+\item{pco2_units}{Unit for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.}
 }
 \value{
 No return value.
@@ -19,6 +17,6 @@ No return value.
 \description{
 \code{pco2_param_check} checks a vector of pCO2 values for abnormal or missing values.
 Abnormal values are designed to catch values entered in error rather than representing a 'normal'
-physiological range. If abnormal values are seen, a warning is raised. If missing values are
-found an error is raised. Abnormal values are defined as pCO2 < 1kPa or pCO2 > 20kPa
+physiological range. If abnormal values are seen, a warning is raised. 
+Abnormal values are defined as pCO2 < 1kPa or pCO2 > 20kPa
 }

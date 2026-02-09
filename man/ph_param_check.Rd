@@ -4,19 +4,19 @@
 \alias{ph_param_check}
 \title{Check vector of ph values.}
 \usage{
-ph_param_check(ph, skip_range_check = FALSE)
+ph_param_check(ph)
 }
 \arguments{
 \item{ph}{pH (hydrogen ion concentration)}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
 \value{
 No return value.
+
+ @export
 }
 \description{
 \code{ph_param_check} checks a vector of pH values for abnormal or missing values.
 Abnormal values are designed to catch values entered in error rather than representing a 'normal'
-physiological range. If abnormal values are seen, a warning is raised. If missing values are
-found an error is raised. Abnormal values are defined as pH < 6.8  or pH > 7.7
+physiological range. If abnormal values are seen, a warning is raised. 
+Abnormal values are defined as pH < 6.8  or pH > 7.7
 }

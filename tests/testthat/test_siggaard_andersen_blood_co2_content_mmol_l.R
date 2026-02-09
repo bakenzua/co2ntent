@@ -6,7 +6,7 @@ test_that("siggaard_andersen_blood_co2_content_mmol_l returns correct number", {
     pco2=5,
     haemoglobin_g_dl = 10,
     so2_fraction = 0.9,
-    inputs_are_kpa=TRUE
+    pco2_units = "kPa",
   ),  16.037097
   , tolerance=0.000001)
 })
@@ -22,6 +22,7 @@ test_that("siggaard_andersen_blood_co2_content_mmol_l is vectorised", {
     hco3_mmols_l=hco3s,
     pco2=pco2s,
     haemoglobin_g_dl = hbs,
-    so2_fraction = so2s
+    so2_fraction = so2s,
+    pco2_units = "kPa",
     ), expected, tolerance=0.000001)
 })

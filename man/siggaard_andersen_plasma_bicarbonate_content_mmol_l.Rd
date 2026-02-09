@@ -8,8 +8,7 @@ siggaard_andersen_plasma_bicarbonate_content_mmol_l(
   pco2,
   ph = 7.4,
   temperature = 37,
-  inputs_are_kpa = TRUE,
-  skip_range_check = FALSE
+  pco2_units = c("kPa", "mmHg")
 )
 }
 \arguments{
@@ -19,7 +18,7 @@ siggaard_andersen_plasma_bicarbonate_content_mmol_l(
 
 \item{temperature}{temperature in celcius. Default 37c}
 
-\item{inputs_are_kpa}{If TRUE, input pCO2 is in kPa, if FALSE use mmHg}
+\item{pressure_units}{Unit for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.}
 
 \item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
 }
@@ -41,3 +40,4 @@ provide a constant of 0.230 mmol/L/kPa.
   \insertRef{siggaard_1988}{co2ntent}
 }
 }
+\keyword{internal}

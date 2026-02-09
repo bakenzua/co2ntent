@@ -9,8 +9,7 @@ kelman_po2_to_so2(
   temperature = 37,
   ph = 7.4,
   pco2 = 5.332895,
-  inputs_are_kpa = TRUE,
-  skip_range_check = FALSE
+  pressure_units = c("kPa", "mmHg")
 )
 }
 \arguments{
@@ -22,9 +21,7 @@ kelman_po2_to_so2(
 
 \item{pco2}{CO2 partial pressure. Default 5.332895kPa (40mmHg)}
 
-\item{inputs_are_kpa}{Input parameters are kPa, otherwise use mmHg}
-
-\item{skip_range_check}{If TRUE skip checking of parameter ranges. Default: FALSE}
+\item{pressure_units}{Input parameters are kPa, otherwise use mmHg}
 }
 \value{
 Haemoglobin saturation as fraction

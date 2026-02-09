@@ -7,15 +7,16 @@
 #'   \insertRef{douglas_1988}{co2ntent}
 #' }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @param temperature Plasma Temperature in Celsius. Default 37c
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return s The solubility coefficient of CO2 in plasma mmol/dL/kPa
 
 douglas_co2_plasma_solubility <- function(temperature = 37, skip_range_check = FALSE) {
   # error checking
-  temperature_param_check(temperature, skip_range_check = skip_range_check)
+  if (min(temperature, na.rm = TRUE) < 0) {
+    stop("douglas_co2_plasma_solubility: temperature can not be negative")
+  }
 
   # function method
   t_var <- 37 - temperature

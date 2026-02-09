@@ -22,27 +22,32 @@
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param haemoglobin_g_dl Haemoglobin g/dL. No default
 #' @param hufners_constant Oxygen capacity of human haemoglobin. Default 1.306 ml/g
-#' @param inputs_are_kpa If TRUE, input pCO2 is in kPa, if FALSE use mmHg
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
+#' @param po2_units Unit for \code{po2}; one of \code{"kPa"} or \code{"mmHg"}. Default is "kPa". 
+#' 
 #' @return The O2 content of blood in ml/dL
 #'
-blood_oxygen_content_mls_dl <- function(po2,
-                                        so2_fraction,
-                                        haemoglobin_g_dl,
-                                        hufners_constant = 1.306,
-                                        inputs_are_kpa = TRUE,
-                                        skip_range_check = FALSE) {
+blood_oxygen_content_mls_dl <- function(
+  po2,
+  so2_fraction,
+  haemoglobin_g_dl,
+  hufners_constant = 1.306,
+  po2_units = c("kPa", "mmHg")
+) {
+  po2_units <- match.arg(po2_units)
+
   # error checking
-  po2_param_check(po2, inputs_are_kpa = inputs_are_kpa, skip_range_check = skip_range_check)
-  so2_fraction_param_check(so2_fraction, skip_range_check = skip_range_check)
-  haemoglobin_g_dl_param_check(haemoglobin_g_dl, skip_range_check = skip_range_check)
+  if (min(po2, na.rm = TRUE) < 0) {
+    stop("blood_oxygen_content_mls_dl: PO2 can not be negative")
+  }
 
   # function body
-  if (inputs_are_kpa) {
+  if (po2_units == "kPa") {
     dissolved_o2_ml_dl <- 0.0225 * po2
   } else {
     dissolved_o2_ml_dl <- 0.003 * po2
   }
 
-  return((so2_fraction * hufners_constant * haemoglobin_g_dl) + dissolved_o2_ml_dl)
+  return(
+    (so2_fraction * hufners_constant * haemoglobin_g_dl) + dissolved_o2_ml_dl
+  )
 }

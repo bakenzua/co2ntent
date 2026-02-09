@@ -6,7 +6,7 @@ test_that("pco2_param_check raises warning on low value", {
   pco2s_kpa = c(5,5,5,0.5)
   expect_warning(pco2_param_check(pco2s_kpa))
   pco2s_mmHg = 3
-  expect_warning(pco2_param_check(pco2s_mmHg, inputs_are_kpa=FALSE))
+  expect_warning(pco2_param_check(pco2s_mmHg, pco2_units = "mmHg"))
 })
 
 test_that("pco2_param_check raises warning on high value", {
@@ -15,7 +15,7 @@ test_that("pco2_param_check raises warning on high value", {
   pco2s_kpa = c(5,5,5,31)
   expect_warning(pco2_param_check(pco2s_kpa))
   pco2s_mmHg = 235
-  expect_warning(pco2_param_check(pco2s_mmHg, inputs_are_kpa=FALSE))
+  expect_warning(pco2_param_check(pco2s_mmHg, pco2_units = "mmHg"))
 })
 
 test_that("pco2_param_check raises error on missing value", {
