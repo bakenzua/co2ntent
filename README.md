@@ -82,6 +82,13 @@ co2ntent::douglas_table_3 |>
     names_to = "calculated_method",
     values_to = "calculated_content"
   ) |>
+  mutate(
+    calculated_method = if_else(
+      calculated_method == "douglas_calculated_content_blood_ml_dl",
+      "Douglas",
+      "Siggard-Andersen"
+    )
+  ) |> 
   ggplot(aes(
     blood_co2_content_ml_dl,
     calculated_content,
