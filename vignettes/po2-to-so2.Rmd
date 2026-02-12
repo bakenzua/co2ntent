@@ -1,6 +1,6 @@
 ---
 title: "Calculating SO2 from pO2"
-author: "B Sanderson"
+author: "B Akenzua-Sanderson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: ../inst/REFERENCES.bib
