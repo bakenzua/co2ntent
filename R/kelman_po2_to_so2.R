@@ -18,7 +18,9 @@
 #' @param po2 O2 partial pressure
 #' @param inputs_are_kpa Input parameters are kPa, otherwise use mmHg
 #' @return Haemoglobin saturation as fraction
-
+#' 
+#' @export
+#' 
 kelman_std_po2_to_so2 <- function(po2, po2_units = c("kPa", "mmHg")) {
  
   po2_units <- match.arg(po2_units)
@@ -67,6 +69,9 @@ kelman_std_po2_to_so2 <- function(po2, po2_units = c("kPa", "mmHg")) {
 #' @param pco2 CO2 partial pressure. Default 5.332895kPa (40mmHg)
 #' @param pressure_units Input parameters are kPa, otherwise use mmHg
 #' @return Haemoglobin saturation as fraction
+#' 
+#' @export
+#' 
 kelman_po2_to_so2 <- function(po2, temperature = 37, ph = 7.40, pco2 = 5.332895, pressure_units = c("kPa", "mmHg")) {
 
   pressure_units <- match.arg(pressure_units)
@@ -124,6 +129,9 @@ kelman_po2_to_so2 <- function(po2, temperature = 37, ph = 7.40, pco2 = 5.332895,
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param pressure_units Input parameters are kPa, otherwise use mmHg
 #' @return Vector of virtual pO2
+#' 
+#' @export
+#' 
 kelman_virtual_po2 <- function(po2, pco2, temperature = 37, ph = 7.4, pressure_units = c("kPa", "mmHg")) {
 
   pressure_units = match.arg(pressure_units)

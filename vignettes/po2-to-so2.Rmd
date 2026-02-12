@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: ../inst/REFERENCES.bib
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Calculating SO2 from pO2}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -62,19 +62,19 @@ $$
 
 #### Usage
 
-`std_kelman_po2_to_so2(po2, inputs_are_kpa = TRUE)`
+`std_kelman_po2_to_so2(po2, po2_units = c("kPa", "mmHg"))`
 
 #### Arguments
 
 * po2	- O2 partial pressure
-* inputs_are_kpa - Input parameters are kPa, otherwise use mmHg
+* po2_units - Input parameters are kPa, otherwise use mmHg
 
 ### kelman_virtual_po2
 `kelman_virtual_po2` calculates 'virtual po2', a pO2 corrected for ph, pco2 and temperature.
 
 #### Usage
 
-`kelman_virtual_po2(po2, pco2, temperature = 37, ph = 7.4, inputs_are_kpa = TRUE)`
+`kelman_virtual_po2(po2, pco2, temperature = 37, ph = 7.4, po2_units = c("kPa", "mmHg"))`
 
 #### Arguments
 
@@ -90,7 +90,7 @@ $$
 
 #### Usage
 
-`kelman_po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895, inputs_are_kpa = TRUE)`
+`kelman_po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895, po2_units = c("kPa", "mmHg"))`
 
 #### Arguments
 
@@ -98,7 +98,22 @@ $$
 * pco2 - CO2 partial pressure. Default 5.332895kPa (40mmHg)
 * temperature	- temperature in celcius. Default 37c
 * ph - pH (hydrogen ion concentration). Default 7.40
-* inputs_are_kpa - Input parameters are kPa, otherwise use mmHg
+* po2_units - Input parameters are kPa, otherwise use mmHg. Default kPa
+
+### po2_to_so2
+
+`po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895, po2_units = c("kPa", "mmHg"))`
+
+At this point `po2_to_so2' is a wrapper function for `kelman_po2_to_so2` as only Kelman's method is implemented.
+
+#### Arguments
+
+* po2 - O2 partial pressure
+* pco2 - CO2 partial pressure. Default 5.332895kPa (40mmHg)
+* temperature	- temperature in celcius. Default 37c
+* ph - pH (hydrogen ion concentration). Default 7.40
+* po2_units - Input parameters are kPa, otherwise use mmHg. Default kPa
+* method = c("kelman")
 
 ## Examples
 

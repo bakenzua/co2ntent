@@ -11,8 +11,10 @@
 #' @return Numeric vector of same length and (when appropriate) names as `x`.
 #' @examples
 #' mmols_l_to_mls_dl(c(1, 2.5), gas = "co2")
-#' mls_dl_to_mmols_l(c(22.263, 55.6575), gas = "co2")
+#' mls_dl_to_mmols_l(c(2.2263, 5.56575), gas = "co2")
+#' 
 #' @export
+#' 
 mmols_l_to_mls_dl <- function(x, gas = c("co2", "o2", "ideal"), molar_volume = NULL) {
   gas <- match.arg(gas)
   # defaults <- .molar_volume_defaults() # dL / mmol
@@ -24,17 +26,19 @@ mmols_l_to_mls_dl <- function(x, gas = c("co2", "o2", "ideal"), molar_volume = N
   } else {
     vm <- unname(.molar_volume_defaults()[gas])
   }
-  factor <- 10 * vm  # 10 * dL/mmol -> mL/dL per (mmol/L)
+
   if (!is.numeric(x)) stop("`x` must be numeric.")
   if (length(x) == 0) return(numeric(0))
-  out <- x * factor
+  out <- x * vm
   nm <- names(x)
   if (!is.null(nm) && length(nm) == length(out)) names(out) <- nm
   out
 }
 
 #' @rdname mmols_l_to_mls_dl
+#' 
 #' @export
+#' 
 mls_dl_to_mmols_l <- function(x, gas = c("co2", "o2", "ideal"), molar_volume = NULL) {
   gas <- match.arg(gas)
   # defaults <- .molar_volume_defaults() # dL / mmol
@@ -46,14 +50,15 @@ mls_dl_to_mmols_l <- function(x, gas = c("co2", "o2", "ideal"), molar_volume = N
   } else {
     vm <- unname(.molar_volume_defaults()[gas])
   }
-  factor <- 10 * vm  # inverse factor
   if (!is.numeric(x)) stop("`x` must be numeric.")
   if (length(x) == 0) return(numeric(0))
-  out <- x / factor
+  out <- x / vm
   nm <- names(x)
   if (!is.null(nm) && length(nm) == length(out)) names(out) <- nm
   out
 }
+
+
 #' Default molar volumes for gases (internal)
 #'
 #' Named numeric vector of default molar volumes in decilitres per millimole (dL/mmol).

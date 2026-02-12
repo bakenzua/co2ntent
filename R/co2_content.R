@@ -53,32 +53,36 @@ co2_content <- function(
 
   # Whole blood content ------------------------------------------------------
   if (phase == "blood" && method == "douglas" && content_units == "ml/dL") {
-    return(douglas_blood_co2_content_ml_dl(...))
+    return(douglas_blood_co2_content_ml_dl(..., pco2_units = pco2_units))
   }
   if (phase == "blood" && method == "douglas" && content_units == "mmol/L") {
-    return(douglas_blood_co2_content_ml_dl(...) |> mls_dl_to_mmols_l())
+    return(douglas_blood_co2_content_ml_dl(..., pco2_units = pco2_units) |> 
+      mls_dl_to_mmols_l(gas = "co2"))
   }
 
   if (phase == "blood" && method == "siggaard_andersen" && content_units == "mmol/L") {
-    return(siggaard_andersen_blood_co2_content_mmol_l(...))
+    return(siggaard_andersen_blood_co2_content_mmol_l(..., pco2_units = pco2_units))
   }
   if (phase == "blood" && method == "siggaard_andersen" && content_units == "ml/dL") {
-    return(siggaard_andersen_blood_co2_content_mmol_l(...) |> mmols_l_to_mls_dl())
+    return(siggaard_andersen_blood_co2_content_mmol_l(..., pco2_units = pco2_units) 
+      |> mmols_l_to_mls_dl(gas = "co2"))
   }
 
   # Plasma content -----------------------------------------------------------
   if (phase == "plasma" && method == "douglas" && content_units == "ml/dL") {
-    return(douglas_plasma_co2_content_ml_dl(...))
+    return(douglas_plasma_co2_content_ml_dl(..., pco2_units = pco2_units))
   }  
   if (phase == "plasma" && method == "douglas" && content_units == "mmol/L") {
-    return(douglas_plasma_co2_content_ml_dl(...) |> mls_dl_to_mmols_l())
+    return(douglas_plasma_co2_content_ml_dl(..., pco2_units = pco2_units) |> 
+      mls_dl_to_mmols_l(gas = "co2"))
   }
 
   if (phase == "plasma" && method == "siggaard_andersen" && content_units == "mmol/L") {
-    return(siggaard_andersen_plasma_co2_content_mmol_l(...))
+    return(siggaard_andersen_plasma_co2_content_mmol_l(..., pco2_units = pco2_units))
   }
   if (phase == "plasma" && method == "siggaard_andersen" && content_units == "ml/dL") {
-    return(siggaard_andersen_plasma_co2_content_mmol_l(...) |> mmols_l_to_mls_dl())
+    return(siggaard_andersen_plasma_co2_content_mmol_l(..., pco2_units = pco2_units) |> 
+      mmols_l_to_mls_dl(gas = "co2"))
   }
 
   stop(

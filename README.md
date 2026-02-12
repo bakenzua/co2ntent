@@ -8,11 +8,8 @@ of the blood.
 
 Some data sets presented in the referenced literature are also included.
 
-Several helper methods for units conversion and other minor tasks are
+Several helper methods for units conversion and suggested parameter checking are
 provided.
-
-Carbon dioxide content calculation models derived by the author are
-also provided.
 
 Installing the development version
 -------
@@ -30,7 +27,7 @@ Example
 This is an example demonstrating how `con2tent` can be used with tidyverse functions on the inbuilt dataset.
 
 ``` r
-library(tidyverse)
+library(dplyr)
 library(co2ntent)
 
 names(co2ntent::douglas_table_3)
@@ -59,13 +56,13 @@ co2ntent::douglas_table_3 |>
         ph=ph
       ),
       douglas_blood_co2_content_ml_dl,
-      inputs_are_kpa=FALSE
+      co2_units="mmHg"
 
     ),
     # calculate hco3
     plasma_hco3_mmol_l = map2_dbl(
       pco2_torr, ph, 
-      siggaard_andersen_plasma_bicarbonate_content_mmol_l, 
+      actual_bicarbonate_content_mmol_l, 
       inputs_are_kpa=FALSE
     ),
 
@@ -74,7 +71,7 @@ co2ntent::douglas_table_3 |>
       plasma_hco3_mmol_l, 
       pco2_torr, 
       siggaard_andersen_plasma_co2_content_mmol_l, 
-      inputs_are_kpa=FALSE
+      co2_units="mmHg"
     ),
     # calculate siggaard blood content
     siggaard_calculated_content_blood_mmol_l = pmap_dbl(
@@ -86,7 +83,7 @@ co2ntent::douglas_table_3 |>
         ph=ph
       ),
       siggaard_andersen_blood_co2_content_mmol_l,
-      inputs_are_kpa=FALSE
+      co2_units="mmHg"
     ),
     # units conversion
     siggaard_calculated_content_plasma_ml_dl = map_dbl(

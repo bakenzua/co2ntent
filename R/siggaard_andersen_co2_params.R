@@ -1,7 +1,7 @@
 #' Calculate plasma bicarbonate concentration as per Henderson-Hasselbalch equation.
 #'
-#' \code{siggaard_andersen_plasma_bicarbonate_content_mmol_l} plasma bicarbonate concentration as per the
-#' Henderson-Hasselbalch equation described by \insertCite{siggaard_1988}{co2ntent}.
+#' \code{actual_bicarbonate_content_mmol_l} calculates plasma bicarbonate concentration as per the
+#' Henderson-Hasselbalch equation.
 #'
 #' Calculation is a straightforward Henderson-Hasselbalch rearrangement. This relies
 #' on the solubility coefficient of CO2 in plasma. \insertCite{siggaard_1988}{co2ntent}
@@ -16,16 +16,13 @@
 #'
 #' @param pco2 CO2 partial pressure
 #' @param ph pH (hydrogen ion concentration). Default 7.40
-#' @param temperature temperature in celcius. Default 37c
 #' @param pressure_units Unit for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.
-#' @param skip_range_check If TRUE skip checking of parameter ranges. Default: FALSE
 #' @return The HCO3 concentration of plasma in mmol/dL
 #'
-#'
-siggaard_andersen_plasma_bicarbonate_content_mmol_l <- function(
+#' @export
+actual_bicarbonate_content_mmol_l <- function(
   pco2,
   ph = 7.4,
-  temperature = 37,
   pco2_units = c("kPa", "mmHg")
 ) {
   pco2_units <- match.arg(pco2_units)
@@ -33,17 +30,12 @@ siggaard_andersen_plasma_bicarbonate_content_mmol_l <- function(
   # error checking
   if (min(pco2, na.rm = TRUE) < 0) {
     stop(
-      "siggaard_andersen_plasma_bicarbonate_content_mmol_l: pco2 can not be negative"
+      "actual_bicarbonate_content_mmol_l: pco2 can not be negative"
     )
   }
   if (min(ph, na.rm = TRUE) < 0) {
     stop(
-      "siggaard_andersen_plasma_bicarbonate_content_mmol_l: ph can not be negative"
-    )
-  }
-  if (min(temperature, na.rm = TRUE) < 0) {
-    stop(
-      "siggaard_andersen_plasma_bicarbonate_content_mmol_l: temperature can not be negative"
+      "actual_bicarbonate_content_mmol_l: ph can not be negative"
     )
   }
 
@@ -54,7 +46,7 @@ siggaard_andersen_plasma_bicarbonate_content_mmol_l <- function(
     pco2_kpa <- mmhg_to_kpa(pco2)
   }
 
-  s <- 0.231 #  mmol / L / kPa
+  s <- 0.230 #  mmol / L / kPa
   # s <- mmhg_to_kpa(0.023) # 0.003066414 mmol/dl/mmhg
 
   pk_p <- 6.125 - log10(1 + 10^(ph - 8.7))

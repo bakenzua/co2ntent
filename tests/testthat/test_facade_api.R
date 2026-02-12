@@ -28,7 +28,7 @@ test_that("co2_content matches Siggaard-Andersen whole blood CO2 content (mmol/L
       so2_fraction     = 0.9,
       pco2_units = "kPa"
     ),
-    16.037097,
+    17.1243,
     tolerance = 1e-6
   )
 })

@@ -44,7 +44,7 @@ blood_oxygen_content_mls_dl <- function(
   if (po2_units == "kPa") {
     dissolved_o2_ml_dl <- 0.0225 * po2
   } else {
-    dissolved_o2_ml_dl <- 0.003 * po2
+    dissolved_o2_ml_dl <- 0.0225 * mmhg_to_kpa(po2)
   }
 
   return(

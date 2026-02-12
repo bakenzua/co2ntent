@@ -25,7 +25,7 @@
 #' \code{\link{kelman_std_po2_to_so2}}
 #' \code{\link{siggaard_andersen_erythrocyte_ph}}
 #' \code{\link{siggaard_andersen_erythrocyte_p_k}}
-#' \code{\link{siggaard_andersen_plasma_bicarbonate_content_mmol_l}}
+#' \code{\link{actual_bicarbonate_content_mmol_l}}
 #' \code{\link{siggaard_andersen_plasma_co2_content_mmol_l}}
 #' \code{\link{siggaard_andersen_blood_co2_content_mmol_l}}
 #'
