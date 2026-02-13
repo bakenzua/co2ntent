@@ -8,8 +8,7 @@ of the blood.
 
 Some data sets presented in the referenced literature are also included.
 
-Several helper methods for units conversion and suggested parameter checking are
-provided.
+Several helper methods for units conversion are also provided.
 
 Installing the development version
 -------
