@@ -85,7 +85,7 @@ df <- co2ntent::douglas_table_3 |>
       phase = "blood",
       method = "douglas",
       content_units = "ml/dL",
-      pco2_units = "mmHg"
+      pressure_units = "mmHg"
     ),
     siggaard_co2_blood_ct_ml_dl = co2_content(
       # calculate hco3
@@ -102,14 +102,14 @@ df <- co2ntent::douglas_table_3 |>
       phase = "blood",
       method = "siggaard_andersen",
       content_units = "ml/dL",
-      pco2_units = "mmHg"
+      pressure_units = "mmHg"
     ),
     loeppky_co2_blood_ct_ml_dl = co2_content(
       pco2 = pco2_torr,
       phase = "blood",
       method = "loeppky",
       content_units = "ml/dL",
-      pco2_units = "mmHg"
+      pressure_units = "mmHg"
     )
   )
 ```

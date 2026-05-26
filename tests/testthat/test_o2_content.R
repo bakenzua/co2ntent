@@ -6,7 +6,7 @@ test_that("o2_content matches blood_oxygen_content_mls_dl reference value", {
       po2            = 10,
       so2_fraction   = 0.95,
       haemoglobin_g_dl = 15,
-      po2_units = "kPa"
+      pressure_units = "kPa"
     ),
     18.8355,
     tolerance = 1e-6

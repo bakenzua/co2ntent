@@ -8,7 +8,7 @@ co2_content(
   phase = c("blood", "plasma"),
   method = c("douglas", "siggaard_andersen", "loeppky"),
   content_units = c("ml/dL", "mmol/L"),
-  pco2_units = c("kPa", "mmHg"),
+  pressure_units = c("kPa", "mmHg"),
   ...
 )
 }
@@ -16,11 +16,15 @@ co2_content(
 \item{phase}{Character string; one of \code{"plasma"} or \code{"blood"}.
 Selects whether to calculate plasma or whole-blood CO2 content.}
 
-\item{method}{Character string; one of \code{"douglas"} or
-\code{"siggaard_andersen"}. Selects the underlying physiological model.}
+\item{method}{Character string; one of \code{"douglas"},
+\code{"siggaard_andersen"}, or \code{"loeppky"}.
+Selects the underlying physiological model.}
 
 \item{content_units}{Character string; currently \code{"ml/dL"} for Douglas-based
 calculations and \code{"mmol/L"} for Siggaard-Andersen-based calculations.}
+
+\item{pressure_units}{Units for pressure parameters; one of \code{"kPa"} or
+\code{"mmHg"}.}
 
 \item{...}{Additional arguments passed on to the underlying implementation
 function. See the documentation for the corresponding lower-level
@@ -53,7 +57,7 @@ co2_content(
   pco2            = 5,
   haemoglobin_g_dl = 10,
   so2_fraction     = 0.9,
-  pco2_units = "kPa"
+  pressure_units = "kPa"
 )
 
 }

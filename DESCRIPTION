@@ -9,7 +9,6 @@ Description: Collection of functions for calculating the Carbon Dioxide and Oxyg
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.3
 Suggests: testthat,
     knitr,
     rmarkdown
@@ -18,3 +17,4 @@ RdMacros: Rdpack
 Depends: R (>= 2.10)
 VignetteBuilder: knitr
 URL: https://bakenzua.github.io/co2ntent/
+Config/roxygen2/version: 8.0.0

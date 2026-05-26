@@ -48,7 +48,7 @@ $$
 
 #### Usage
 
-- `o2_content(po2, so2_fraction, haemoglobin_g_dl, hufners_constant, po2_units="kPa")`
+- `o2_content(po2, so2_fraction, haemoglobin_g_dl, hufners_constant, pressure_units="kPa")`
 
 #### Arguments
 
@@ -56,7 +56,7 @@ $$
 * so2_fraction - Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 * haemoglobin_g_dl - Haemoglobin g/dL. No default
 * hufners_constant  - Oxygen capacity of human haemoglobin. Default 1.306 ml/g
-* po2_units - Input parameters are kPa, otherwise use mmHg
+* pressure_units - Input parameters are kPa, otherwise use mmHg
 
 ## Examples
 

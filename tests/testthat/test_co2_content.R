@@ -9,7 +9,7 @@ test_that("co2_content matches Douglas whole blood CO2 content (ml/dL)", {
       haemoglobin_g_dl = 10,
       so2_fraction = 0.9,
       pco2 = 5,
-      pco2_units = "kPa"
+      pressure_units = "kPa"
     ) |>
       unname(),
     47.55379,
@@ -24,10 +24,10 @@ test_that("co2_content matches Loeppky whole blood CO2 content (ml/dL)", {
       method = "loeppky",
       content_units = "ml/dL",
       pco2 = 5,
-      pco2_units = "kPa"
+      pressure_units = "kPa"
     ) |>
       unname(),
-    48.8328, # loeppky_blood_co2_content_ml_dl(pco2=5, pco2_units = "kPa"),
+    48.8328, # loeppky_blood_co2_content_ml_dl(pco2=5, pressure_units = "kPa"),
     tolerance = 1e-5
   )
 })
@@ -42,7 +42,7 @@ test_that("co2_content matches Siggaard-Andersen whole blood CO2 content (mmol/L
       pco2 = 5,
       haemoglobin_g_dl = 10,
       so2_fraction = 0.9,
-      pco2_units = "kPa"
+      pressure_units = "kPa"
     ),
     17.1243,
     tolerance = 1e-6

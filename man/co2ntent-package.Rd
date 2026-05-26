@@ -48,5 +48,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Barnaby Akenzua-Sanderson \email{barnaby.sanderson1@nhs.net}
 
+Authors:
+\itemize{
+  \item Barnaby Akenzua-Sanderson \email{barnaby.sanderson1@nhs.net}
+}
+
 }
 \keyword{internal}

@@ -5,10 +5,13 @@
 #'
 #' @param phase Character string; one of \code{"plasma"} or \code{"blood"}.
 #'   Selects whether to calculate plasma or whole-blood CO2 content.
-#' @param method Character string; one of \code{"douglas"} or
-#'   \code{"siggaard_andersen"}. Selects the underlying physiological model.
+#' @param method Character string; one of \code{"douglas"},
+#'   \code{"siggaard_andersen"}, or \code{"loeppky"}.
+#'   Selects the underlying physiological model.
 #' @param content_units Character string; currently \code{"ml/dL"} for Douglas-based
 #'   calculations and \code{"mmol/L"} for Siggaard-Andersen-based calculations.
+#' @param pressure_units Units for pressure parameters; one of \code{"kPa"} or
+#'   \code{"mmHg"}.
 #' @param ... Additional arguments passed on to the underlying implementation
 #'   function. See the documentation for the corresponding lower-level
 #'   functions for full details.
@@ -35,7 +38,7 @@
 #'   pco2            = 5,
 #'   haemoglobin_g_dl = 10,
 #'   so2_fraction     = 0.9,
-#'   pco2_units = "kPa"
+#'   pressure_units = "kPa"
 #' )
 #'
 #' @export
@@ -43,53 +46,53 @@ co2_content <- function(
   phase  = c("blood", "plasma"),
   method = c("douglas", "siggaard_andersen", "loeppky"),
   content_units  = c("ml/dL", "mmol/L"),
-  pco2_units = c("kPa", "mmHg"),
+  pressure_units = c("kPa", "mmHg"),
   ...
 ) {
   phase  <- match.arg(phase)
   method <- match.arg(method)
   content_units  <- match.arg(content_units)
-  pco2_units <- match.arg(pco2_units)
+  pressure_units <- match.arg(pressure_units)
 
   # Whole blood content ------------------------------------------------------
   if (phase == "blood" && method == "douglas" && content_units == "ml/dL") {
-    return(douglas_blood_co2_content_ml_dl(..., pco2_units = pco2_units))
+    return(douglas_blood_co2_content_ml_dl(..., pco2_units = pressure_units))
   }
   if (phase == "blood" && method == "douglas" && content_units == "mmol/L") {
-    return(douglas_blood_co2_content_ml_dl(..., pco2_units = pco2_units) |> 
+    return(douglas_blood_co2_content_ml_dl(..., pco2_units = pressure_units) |> 
       mls_dl_to_mmols_l(gas = "co2"))
   }
 
   if (phase == "blood" && method == "loeppky" && content_units == "mmol/L") {
-    return(loeppky_blood_co2_content_ml_dl(..., pco2_units = pco2_units) |> 
+    return(loeppky_blood_co2_content_ml_dl(..., pco2_units = pressure_units) |> 
       mls_dl_to_mmols_l(gas="co2"))
   }
   if (phase == "blood" && method == "loeppky" && content_units == "ml/dL") {
-    return(loeppky_blood_co2_content_ml_dl(..., pco2_units = pco2_units))
+    return(loeppky_blood_co2_content_ml_dl(..., pco2_units = pressure_units))
   }
 
   if (phase == "blood" && method == "siggaard_andersen" && content_units == "mmol/L") {
-    return(siggaard_andersen_blood_co2_content_mmol_l(..., pco2_units = pco2_units))
+    return(siggaard_andersen_blood_co2_content_mmol_l(..., pco2_units = pressure_units))
   }
   if (phase == "blood" && method == "siggaard_andersen" && content_units == "ml/dL") {
-    return(siggaard_andersen_blood_co2_content_mmol_l(..., pco2_units = pco2_units) 
+    return(siggaard_andersen_blood_co2_content_mmol_l(..., pco2_units = pressure_units) 
       |> mmols_l_to_mls_dl(gas = "co2"))
   }
 
   # Plasma content -----------------------------------------------------------
   if (phase == "plasma" && method == "douglas" && content_units == "ml/dL") {
-    return(douglas_plasma_co2_content_ml_dl(..., pco2_units = pco2_units))
+    return(douglas_plasma_co2_content_ml_dl(..., pco2_units = pressure_units))
   }  
   if (phase == "plasma" && method == "douglas" && content_units == "mmol/L") {
-    return(douglas_plasma_co2_content_ml_dl(..., pco2_units = pco2_units) |> 
+    return(douglas_plasma_co2_content_ml_dl(..., pco2_units = pressure_units) |> 
       mls_dl_to_mmols_l(gas = "co2"))
   }
 
   if (phase == "plasma" && method == "siggaard_andersen" && content_units == "mmol/L") {
-    return(siggaard_andersen_plasma_co2_content_mmol_l(..., pco2_units = pco2_units))
+    return(siggaard_andersen_plasma_co2_content_mmol_l(..., pco2_units = pressure_units))
   }
   if (phase == "plasma" && method == "siggaard_andersen" && content_units == "ml/dL") {
-    return(siggaard_andersen_plasma_co2_content_mmol_l(..., pco2_units = pco2_units) |> 
+    return(siggaard_andersen_plasma_co2_content_mmol_l(..., pco2_units = pressure_units) |> 
       mmols_l_to_mls_dl(gas = "co2"))
   }
 

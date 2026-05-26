@@ -9,7 +9,7 @@ o2_content(
   so2_fraction,
   haemoglobin_g_dl,
   hufners_constant = 1.306,
-  po2_units = c("kPa", "mmHg"),
+  pressure_units = c("kPa", "mmHg"),
   content_units = c("ml/dL", "mmol/L")
 )
 }
@@ -24,7 +24,7 @@ o2_content(
 \item{hufners_constant}{Oxygen capacity of human haemoglobin in mL/g.
 Default is \code{1.306} as per Gregory (1974).}
 
-\item{po2_units}{Unit for \code{po2}; one of \code{"kPa"} or \code{"mmHg"}.}
+\item{pressure_units}{Unit for \code{po2}; one of \code{"kPa"} or \code{"mmHg"}.}
 
 \item{content_units}{Unit for result; one of \code{"mmol/L"} or \code{"ml/dL"}.}
 }
@@ -40,7 +40,7 @@ o2_content(
   po2            = 10,
   so2_fraction   = 0.95,
   haemoglobin_g_dl = 15,
-  po2_units = "kPa"
+  pressure_units = "kPa"
 )
 
 }

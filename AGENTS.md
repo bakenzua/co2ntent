@@ -15,20 +15,21 @@ Three public facades dispatch to lower-level implementations by method/units:
 | `o2_content()`     | `R/o2_content.R`  | (single impl)                  |
 | `po2_to_so2()`     | `R/po2_to_so2.R`  | kelman                         |
 
-Facades accept `phase`, `method`, `content_units`, `pco2_units`/`po2_units`/`pressure_units`
-and pass through via `...` to the underlying function. Underlying functions
-are also exported for direct use.
+All facades use the unified `pressure_units` parameter (kPa/mmHg). They pass it
+by the appropriate lower-level name (`pco2_units` for CO2 functions, `po2_units`
+for O2 functions) to the underlying implementations. Both levels of functions
+are exported for direct use.
 
 ## Unit Parameter Naming Convention (critical — easy to get wrong)
 
-| Gas  | Facade uses      | Kelman/PO2 functions use |
-|------|------------------|--------------------------|
-| CO2  | `pco2_units`     | —                        |
-| O2   | `po2_units`      | —                        |
-| Both | —                | `pressure_units`         |
+| Gas  | Facade uses        | Lower-level functions use |
+|------|--------------------|---------------------------|
+| CO2  | `pressure_units`   | `pco2_units`              |
+| O2   | `pressure_units`   | `po2_units`               |
+| Both | —                  | `pressure_units`          |
 
-`kelman_po2_to_so2()` and `kelman_virtual_po2()` take `pressure_units` (kPa/mmHg),
-NOT `po2_units`. `kelman_std_po2_to_so2()` takes `po2_units`.
+`kelman_po2_to_so2()` and `kelman_virtual_po2()` take `pressure_units` (kPa/mmHg)
+since they handle both pO2 and pCO2. `kelman_std_po2_to_so2()` takes `po2_units`.
 
 ## Exported Functions (15)
 

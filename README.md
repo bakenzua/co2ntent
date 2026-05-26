@@ -48,7 +48,7 @@ co2ntent::douglas_table_3 |>
       phase = "blood",
       method = "douglas",
       content_units = "ml/dL",
-      pco2_units = "mmHg"
+      pressure_units = "mmHg"
     ),
     siggaard_calculated_content_blood_ml_dl = co2_content(
       # calculate hco3
@@ -56,7 +56,7 @@ co2ntent::douglas_table_3 |>
         pco2_torr,
         ph,
         actual_bicarbonate_content_mmol_l,
-        pco2_units = "mmHg"
+        pressure_units = "mmHg"
       ),
       pco2 = pco2_torr,
       haemoglobin_g_dl = haemoglobin_g_dl,
@@ -65,7 +65,7 @@ co2ntent::douglas_table_3 |>
       phase = "blood",
       method = "siggaard_andersen",
       content_units = "ml/dL",
-      pco2_units = "mmHg"
+      pressure_units = "mmHg"
     )
   ) |>
   select(
