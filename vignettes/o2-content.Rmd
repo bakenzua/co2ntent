@@ -56,7 +56,7 @@ $$
 * so2_fraction - Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 * haemoglobin_g_dl - Haemoglobin g/dL. No default
 * hufners_constant  - Oxygen capacity of human haemoglobin. Default 1.306 ml/g
-* inputs_are_kpa - Input parameters are kPa, otherwise use mmHg
+* po2_units - Input parameters are kPa, otherwise use mmHg
 
 ## Examples
 
