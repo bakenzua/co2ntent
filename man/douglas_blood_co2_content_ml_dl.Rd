@@ -24,7 +24,7 @@ douglas_blood_co2_content_ml_dl(
 
 \item{temperature}{temperature in celsius. Default 37c}
 
-\item{pco2_units}{Unit for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.}
+\item{pco2_units}{Units for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.}
 }
 \value{
 The CO2 content of plasma in ml/dL

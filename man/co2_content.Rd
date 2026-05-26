@@ -6,7 +6,7 @@
 \usage{
 co2_content(
   phase = c("blood", "plasma"),
-  method = c("douglas", "siggaard_andersen"),
+  method = c("douglas", "siggaard_andersen", "loeppky"),
   content_units = c("ml/dL", "mmol/L"),
   pco2_units = c("kPa", "mmHg"),
   ...

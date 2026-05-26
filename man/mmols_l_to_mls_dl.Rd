@@ -5,9 +5,9 @@
 \alias{mls_dl_to_mmols_l}
 \title{Convert mmol/L ↔ mL/dL for CO2, O2 or ideal gas}
 \usage{
-mmols_l_to_mls_dl(x, gas = c("co2", "o2", "ideal"), molar_volume = NULL)
+mmols_l_to_mls_dl(x, gas = c("ideal", "co2", "o2"), molar_volume = NULL)
 
-mls_dl_to_mmols_l(x, gas = c("co2", "o2", "ideal"), molar_volume = NULL)
+mls_dl_to_mmols_l(x, gas = c("ideal", "co2", "o2"), molar_volume = NULL)
 }
 \arguments{
 \item{x}{Numeric vector: values to convert (mmol/L for mmols_l_to_mls_dl, mL/dL for mls_dl_to_mmols_l).}
@@ -28,5 +28,6 @@ $$ mL/dL = mmol/L \times (10 \times V_m). $$
 }
 \examples{
 mmols_l_to_mls_dl(c(1, 2.5), gas = "co2")
-mls_dl_to_mmols_l(c(22.263, 55.6575), gas = "co2")
+mls_dl_to_mmols_l(c(2.2263, 5.56575), gas = "co2")
+
 }

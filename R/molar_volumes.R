@@ -15,7 +15,7 @@
 #' 
 #' @export
 #' 
-mmols_l_to_mls_dl <- function(x, gas = c("co2", "o2", "ideal"), molar_volume = NULL) {
+mmols_l_to_mls_dl <- function(x, gas = c("ideal", "co2", "o2"), molar_volume = NULL) {
   gas <- match.arg(gas)
   # defaults <- .molar_volume_defaults() # dL / mmol
   if (!is.null(molar_volume)) {
@@ -39,7 +39,7 @@ mmols_l_to_mls_dl <- function(x, gas = c("co2", "o2", "ideal"), molar_volume = N
 #' 
 #' @export
 #' 
-mls_dl_to_mmols_l <- function(x, gas = c("co2", "o2", "ideal"), molar_volume = NULL) {
+mls_dl_to_mmols_l <- function(x, gas = c("ideal", "co2", "o2"), molar_volume = NULL) {
   gas <- match.arg(gas)
   # defaults <- .molar_volume_defaults() # dL / mmol
   if (!is.null(molar_volume)) {
@@ -76,5 +76,5 @@ mls_dl_to_mmols_l <- function(x, gas = c("co2", "o2", "ideal"), molar_volume = N
 #' @examples
 #' .molar_volume_defaults()["o2"]
 .molar_volume_defaults <- function() {
-  c(co2 = 2.2263, o2 = 2.2393, ideal = 2.2414) # dL / mmol
+  c(ideal = 2.2414, co2 = 2.2263, o2 = 2.2393) # dL / mmol
 } 

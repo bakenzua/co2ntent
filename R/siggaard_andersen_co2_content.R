@@ -93,11 +93,11 @@ siggaard_andersen_blood_co2_content_mmol_l <- function(
     stop("siggaard_andersen_blood_co2_content_mmol_l: ph can not be negative")
   }
   if (min(so2_fraction, na.rm = TRUE) < 0) {
-    stop("douglas_blood_co2_content_ml_dl: so2_fraction can not be negative")
+    stop(      "siggaard_andersen_blood_co2_content_mmol_l: so2_fraction can not be negative")
   }
   if (max(so2_fraction, na.rm = TRUE) > 1) {
     stop(
-      "douglas_blood_co2_content_ml_dl: so2_fraction can not be greater than 1"
+      "siggaard_andersen_blood_co2_content_mmol_l: so2_fraction can not be greater than 1"
     )
   }
 

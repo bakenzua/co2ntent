@@ -30,7 +30,7 @@ douglas_plasma_co2_content_ml_dl <- function(
 
   # error checking
   if (min(pco2, na.rm = TRUE) < 0) {
-    stop("douglas_plasma_co2_content_ml_dl: ph can not be negative")
+    stop("douglas_plasma_co2_content_ml_dl: pco2 can not be negative")
   }
   if (min(temperature, na.rm = TRUE) < 0) {
     stop("douglas_plasma_co2_content_ml_dl: temperature can not be negative")
@@ -129,7 +129,7 @@ douglas_co2_plasma_to_blood_ratio <- function(
 #' @param so2_fraction Haemoglobin saturation as a fraction e.g 0 < so2_fraction < 1.0
 #' @param ph pH (hydrogen ion concentration). Default 7.40
 #' @param temperature temperature in celsius. Default 37c
-#' @param pco2_units Unit for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.
+#' @param pco2_units Units for \code{pco2}; one of \code{"kPa"} or \code{"mmHg"}.
 #' @return The CO2 content of plasma in ml/dL
 #'
 #'

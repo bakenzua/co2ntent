@@ -57,12 +57,12 @@ $$
 
 ## Implementation
 
-### std_kelman_po2_to_so2
-`co2ntent::std_kelman_po2_to_so2` calculates $S_{O_2}$ from $p_{O_2}$ in blood via the seven coefficient model described above. This function makes no correction for acid/base disturbance, assuming pH=7.4, temperature=37c and pCO2=40mmHg
+### kelman_std_po2_to_so2
+`co2ntent::kelman_std_po2_to_so2` calculates $S_{O_2}$ from $p_{O_2}$ in blood via the seven coefficient model described above. This function makes no correction for acid/base disturbance, assuming pH=7.4, temperature=37c and pCO2=40mmHg
 
 #### Usage
 
-`std_kelman_po2_to_so2(po2, po2_units = c("kPa", "mmHg"))`
+`kelman_std_po2_to_so2(po2, po2_units = c("kPa", "mmHg"))`
 
 #### Arguments
 
@@ -74,7 +74,7 @@ $$
 
 #### Usage
 
-`kelman_virtual_po2(po2, pco2, temperature = 37, ph = 7.4, po2_units = c("kPa", "mmHg"))`
+`kelman_virtual_po2(po2, pco2, temperature = 37, ph = 7.4, pressure_units = c("kPa", "mmHg"))`
 
 #### Arguments
 
@@ -82,7 +82,7 @@ $$
 * pco2 - CO2 partial pressure. Default 5.332895kPa (40mmHg)
 * temperature	- temperature in celcius. Default 37c
 * ph - pH (hydrogen ion concentration). Default 7.40
-* inputs_are_kpa - Input parameters are kPa, otherwise use mmHg
+* pressure_units - Input parameters are kPa, otherwise use mmHg
 
 ### kelman_po2_to_so2
 
@@ -90,7 +90,7 @@ $$
 
 #### Usage
 
-`kelman_po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895, po2_units = c("kPa", "mmHg"))`
+`kelman_po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895, pressure_units = c("kPa", "mmHg"))`
 
 #### Arguments
 
@@ -98,11 +98,11 @@ $$
 * pco2 - CO2 partial pressure. Default 5.332895kPa (40mmHg)
 * temperature	- temperature in celcius. Default 37c
 * ph - pH (hydrogen ion concentration). Default 7.40
-* po2_units - Input parameters are kPa, otherwise use mmHg. Default kPa
+* pressure_units - Input parameters are kPa, otherwise use mmHg. Default kPa
 
 ### po2_to_so2
 
-`po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895, po2_units = c("kPa", "mmHg"))`
+`po2_to_so2(po2, temperature = 37, ph = 7.4, pco2 = 5.332895, pressure_units = c("kPa", "mmHg"))`
 
 At this point `po2_to_so2' is a wrapper function for `kelman_po2_to_so2` as only Kelman's method is implemented.
 
@@ -112,25 +112,25 @@ At this point `po2_to_so2' is a wrapper function for `kelman_po2_to_so2` as only
 * pco2 - CO2 partial pressure. Default 5.332895kPa (40mmHg)
 * temperature	- temperature in celcius. Default 37c
 * ph - pH (hydrogen ion concentration). Default 7.40
-* po2_units - Input parameters are kPa, otherwise use mmHg. Default kPa
+* pressure_units - Input parameters are kPa, otherwise use mmHg. Default kPa
 * method = c("kelman")
 
 ## Examples
 
-### std_kelman_po2_to_so2
+### kelman_std_po2_to_so2
 
 ```
 > library(co2ntent)
 >
-> std_kelman_po2_to_so2(po2=8)
+> kelman_std_po2_to_so2(po2=8)
 [1] 0.9105911
 >
 > po2_kpa <- c(8,9,10,11,12)
-> std_kelman_po2_to_so2(po2=po2_kpa)
+> kelman_std_po2_to_so2(po2=po2_kpa)
 [1] 0.9105911 0.9352465 0.9507951 0.9610931 0.9682613
 >
 >
-> std_kelman_po2_to_so2(po2=(8 * 7.5), inputs_are_kpa = FALSE)
+> kelman_std_po2_to_so2(po2=(8 * 7.5), po2_units = "mmHg")
 [1] 0.9105706
 ```
 

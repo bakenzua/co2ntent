@@ -41,7 +41,7 @@
 #' @export
 co2_content <- function(
   phase  = c("blood", "plasma"),
-  method = c("douglas", "siggaard_andersen"),
+  method = c("douglas", "siggaard_andersen", "loeppky"),
   content_units  = c("ml/dL", "mmol/L"),
   pco2_units = c("kPa", "mmHg"),
   ...
@@ -58,6 +58,14 @@ co2_content <- function(
   if (phase == "blood" && method == "douglas" && content_units == "mmol/L") {
     return(douglas_blood_co2_content_ml_dl(..., pco2_units = pco2_units) |> 
       mls_dl_to_mmols_l(gas = "co2"))
+  }
+
+  if (phase == "blood" && method == "loeppky" && content_units == "mmol/L") {
+    return(loeppky_blood_co2_content_ml_dl(..., pco2_units = pco2_units) |> 
+      mls_dl_to_mmols_l(gas="co2"))
+  }
+  if (phase == "blood" && method == "loeppky" && content_units == "ml/dL") {
+    return(loeppky_blood_co2_content_ml_dl(..., pco2_units = pco2_units))
   }
 
   if (phase == "blood" && method == "siggaard_andersen" && content_units == "mmol/L") {

@@ -1,0 +1,167 @@
+---
+title: "Calculating CO2 Content of Blood"
+author: "B Akenzua-Sanderson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+bibliography: ../inst/REFERENCES.bib
+vignette: >
+  %\VignetteIndexEntry{Calculating CO2 Content of Blood}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(ggplot2)            
+library(dplyr)
+library(co2ntent)
+
+# define a function for compiling Bland-Altman plots
+bland_altman_plot <- function(
+  data,
+  var_a,
+  var_b,
+  plot_title="Bland-Altman Plot of var_a vs. var_b",
+  xlab = "Mean (var_a + var_b)/2",
+  ylab = "Difference in measurements (var_a - var_b)",
+  mean_colour ="blue",
+  sd_colour = "red"
+) {
+  # calclulate some data points
+  data <- data |>
+    mutate(
+      mean = ({{ var_a }} + {{ var_b }}) / 2,
+      diff = {{ var_a }} - {{ var_b }}
+    )
+  mean_diff <- mean(data$diff)
+  sd_diff <- sd(data$diff)
+  min_mean <- min(data$mean)
+  max_mean <- max(data$mean)
+  ul <- mean_diff + (1.96 * sd_diff)
+  ll <- mean_diff - (1.96 * sd_diff)
+  x_labels <- min_mean - 0.1 * (max_mean -min_mean)
+  x_lim <- c(min_mean - 0.2 * (max_mean - min_mean), max_mean + 0.1 * (max_mean - min_mean))
+
+  # construct plot
+  plot <- ggplot(data, aes(mean, diff)) +
+    geom_hline(yintercept = mean_diff, colour=mean_colour) +
+    annotate("text", x= x_labels, y = mean_diff, label=glue::glue("Mean = {d}", d=round(mean_diff,2)), vjust=1.5, colour=mean_colour) +
+    geom_hline(yintercept = ul, colour=sd_colour) +
+    annotate("text", x= x_labels, y = ul, label=glue::glue("+1.96 SD = {d}", d=round(ul, 2)), vjust=-0.5, colour=sd_colour) +
+    geom_hline(yintercept = ll, colour=sd_colour) +
+    annotate("text", x= x_labels, y = ll, label=glue::glue("-1.96 SD = {d}", d=round(ll, 2)), vjust=1.5, colour=sd_colour) +
+    geom_point(shape=1, size=4) +
+    coord_cartesian(xlim = x_lim) +
+    labs(
+      x=xlab, y=ylab, title = plot_title
+    )
+}
+```
+
+# Introduction
+
+Several canonical methods of calculating the CO~2~ content in blood are described. `co2ntent` currently implements three methods:
+
+-   @douglas_1988
+-   @siggaard_1988
+-   @loeppky_1983
+
+Using the data from Table 3 from @douglas_1988, this vignette will demonstrate the calculation of the CO~2~ content of whole blood ($Ct_{CO_2}$)and compare each method to measured values of $Ct_{CO_2}$. Measurements wre performed using the Van Slyke method of determining total CO~2~ content ($Ct_{CO_2.VS}$) by vacuum extraction; releasing gases from a blood sample using acid, followed by manometric measurement.
+
+```{r}
+
+# Calculate CO2 content via the three canonical methods
+df <- co2ntent::douglas_table_3 |> 
+  mutate(
+    douglas_co2_blood_ct_ml_dl = co2_content(
+      pco2 = pco2_torr,
+      ph = ph,
+      haemoglobin_g_dl = haemoglobin_g_dl,
+      so2_fraction = so2_fraction,
+      phase = "blood",
+      method = "douglas",
+      content_units = "ml/dL",
+      pco2_units = "mmHg"
+    ),
+    siggaard_co2_blood_ct_ml_dl = co2_content(
+      # calculate hco3
+      hco3_mmols_l = purrr::map2_dbl(
+        pco2_torr,
+        ph,
+        actual_bicarbonate_content_mmol_l,
+        pco2_units = "mmHg"
+      ),
+      pco2 = pco2_torr,
+      haemoglobin_g_dl = haemoglobin_g_dl,
+      so2_fraction = so2_fraction,
+      ph = ph,
+      phase = "blood",
+      method = "siggaard_andersen",
+      content_units = "ml/dL",
+      pco2_units = "mmHg"
+    ),
+    loeppky_co2_blood_ct_ml_dl = co2_content(
+      pco2 = pco2_torr,
+      phase = "blood",
+      method = "loeppky",
+      content_units = "ml/dL",
+      pco2_units = "mmHg"
+    )
+  )
+```
+
+# Methods and theoretical background
+
+# Douglas method
+
+The content of CO~2~ in blood calculated via the method developed by @douglas_1988 is termed $Ct_{CO_2.Douglas}$
+
+```{r}
+bland_altman_plot(
+  data=df, 
+  var_a=blood_co2_content_ml_dl, 
+  var_b=douglas_co2_blood_ct_ml_dl,
+  xlab = "Mean (Ct + Douglas)/2",
+  ylab = "Difference (Van Slycke - Douglas)",
+  plot_title = ""
+  ) +
+  theme_minimal()
+```
+
+# Siggard-Andersen method
+
+The content of CO~2~ in blood calculated via the method developed by @siggaard_1988 is termed $Ct_{CO_2.Siggard}$
+
+```{r}
+bland_altman_plot(
+  data=df, 
+  var_a=blood_co2_content_ml_dl, 
+  var_b=siggaard_co2_blood_ct_ml_dl,
+  xlab = "Mean (Ct + Siggard)/2",
+  ylab = "Difference (Van Slycke - Siggard)",
+  plot_title = ""
+  ) +
+  theme_minimal()
+```
+
+# Loeppky method
+
+The content of CO~2~ in blood calculated via the method developed by @loeppky_1983 is termed $Ct_{CO_2.Loeppky}$
+
+```{r}
+bland_altman_plot(
+  data=df, 
+  var_a=blood_co2_content_ml_dl, 
+  var_b=loeppky_co2_blood_ct_ml_dl,
+  xlab = "Mean (Ct + Loeppky)/2",
+  ylab = "Difference (Van Slycke - Loeppky)",
+  plot_title = ""
+  ) +
+  theme_minimal()
+```
+
+## References
